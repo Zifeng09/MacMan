@@ -10,5 +10,9 @@ package macman;
  * @author jxw5640
  */
 public class Enemy {
+    private int scoreValue;
     
+    public Enemy(int scoreValue){
+        this.scoreValue = scoreValue;
+    }
 }

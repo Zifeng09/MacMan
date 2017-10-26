@@ -15,7 +15,10 @@ public class MacMan {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        // Initialize the menu
+        MenuController theMenuCntl = new MenuController();
+        
+        
     }
     
 }
