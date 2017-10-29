@@ -5,10 +5,24 @@
  */
 package macman;
 
+import java.awt.Dimension;
+import javax.swing.JFrame;
+
 /**
  *
  * @author N9864
  */
 public class GameController {
+    private GameView theGameView = null;
     
+    
+  public GameController(){
+      
+        theGameView = new GameView(this);
+        theGameView.setVisible(true);
+        theGameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    
+       
+      
+  }
 }

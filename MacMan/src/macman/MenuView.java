@@ -14,9 +14,9 @@ public class MenuView extends javax.swing.JFrame {
     /**
      * Creates new form MenuView
      */
-    private MenuController theParentMenuCntl = new MenuController();
+    private MenuController theMenuCntl;
     public MenuView(MenuController theParentMenuCntl) {
-        this.theParentMenuCntl = theParentMenuCntl;
+        theMenuCntl = theParentMenuCntl;
         initComponents();
     }
 
@@ -29,24 +29,45 @@ public class MenuView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        StartButton = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        StartButton.setText("Start");
+        StartButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StartButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(117, 117, 117)
+                .addComponent(StartButton)
+                .addContainerGap(120, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(225, Short.MAX_VALUE)
+                .addComponent(StartButton)
+                .addGap(202, 202, 202))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void StartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartButtonActionPerformed
+       theMenuCntl.startGame();
+       this.setVisible(false);
+    }//GEN-LAST:event_StartButtonActionPerformed
+
         
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton StartButton;
     // End of variables declaration//GEN-END:variables
 }

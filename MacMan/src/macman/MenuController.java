@@ -12,8 +12,16 @@ package macman;
 public class MenuController {
     private MenuView theMenuView;
     private MenuModel theMenuModel;
+    private GameController theGameCntl;
     
     public MenuController(){
-        this.theMenuView = new MenuView(this);
+        theMenuView = new MenuView(this);
+        theMenuView.setVisible(true);
+        
+    }
+    
+    
+    public void startGame(){
+        theGameCntl = new GameController();
     }
 }
