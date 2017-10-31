@@ -31,13 +31,14 @@ public class GameView extends JFrame implements KeyListener{
         JPanel[][] theNumberPanelArray = new JPanel[12][18];
         Border blackline;
         private ArrayList<KeyEvent> keysDown;  
+        private boolean isWall = false;
         
     public GameView(GameController theParentGameController){
         
         theGameController = theParentGameController;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-	this.setTitle("MACMAN BETA");
+	this.setTitle("MACMAN BETA 0.1");
         this.setSize(new Dimension(375,578));
         this.setLayout(null);
         this.addKeyListener(this);
@@ -85,49 +86,58 @@ public class GameView extends JFrame implements KeyListener{
     }
     }
       public void updatePlayerLocation(){
+          
+         
          JPanel player = new JPanel();
+         
          player = theNumberPanelArray[y][x];
          player.setBackground(Color.yellow);
-       
+         
       }
      public void lastColor(){
         theNumberPanelArray[y][x].setBackground(Color.BLUE);
      }
+     
+    
     
         @Override
    public void keyPressed(KeyEvent e) {
     
          // 没写防错的code player会吃掉墙，也会越界
-             
+            
          if(e.getKeyCode() == KeyEvent.VK_LEFT){
-                lastColor();
+            if(y!=0){
+                 lastColor();
                     y--;
                  updatePlayerLocation() ;
-                
+            }
          }
     
            if(e.getKeyCode() == KeyEvent.VK_UP){
+             if(x!=0){
                 lastColor();
                     x--;
                  updatePlayerLocation() ;
-                
+             }  
          }
            if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+               if(y!=11){
                 lastColor();
                     y++;
                  updatePlayerLocation() ;
-                
+               }    
          }
             if(e.getKeyCode() == KeyEvent.VK_DOWN){
+                if(x!=17){
                 lastColor();
                    x++;
                  updatePlayerLocation() ;
-                
+                }   
          }
         repaint();
             
-        }
-
+        
+   }
     @Override
     public void keyTyped(KeyEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
