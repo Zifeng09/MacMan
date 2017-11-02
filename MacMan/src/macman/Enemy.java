@@ -9,10 +9,14 @@ package macman;
  *
  * @author jxw5640
  */
+import java.awt.Color;
+import java.util.*;
+
 public class Enemy {
-    private int scoreValue;
+    Score theScore;
     
-    public Enemy(int scoreValue){
-        this.scoreValue = scoreValue;
+    public Enemy(int theScore){
+        
     }
+    
 }

@@ -17,6 +17,7 @@ public class MenuController {
     public MenuController(){
         theMenuView = new MenuView(this);
         theMenuView.setVisible(true);
+        theMenuView.setLocationRelativeTo(null);
         
     }
     

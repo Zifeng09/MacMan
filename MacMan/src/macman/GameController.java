@@ -21,7 +21,7 @@ public class GameController {
         theGameView = new GameView(this);
         theGameView.setVisible(true);
         theGameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    
+        theGameView.setLocationRelativeTo(null);
        
       
   }
