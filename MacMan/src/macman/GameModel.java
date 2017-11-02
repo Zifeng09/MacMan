@@ -10,5 +10,9 @@ package macman;
  * @author N9864
  */
 public class GameModel {
+
+    
     
 }
+
+

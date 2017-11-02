@@ -28,7 +28,7 @@ public class GameView extends JFrame implements KeyListener{
         JPanel gridPanel, playerPanel;
         GameController theGameController;
         GameView theGameView;
-        JPanel[][] theNumberPanelArray = new JPanel[12][18];
+        JPanel[][] theNumberPanelArray = new JPanel[24][40];
         Border blackline;
         private ArrayList<KeyEvent> keysDown;  
         private boolean isWall = false;
@@ -39,7 +39,7 @@ public class GameView extends JFrame implements KeyListener{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 	this.setTitle("MACMAN BETA 0.1");
-        this.setSize(new Dimension(375,578));
+        this.setSize(new Dimension(750,620));
         this.setLayout(null);
         this.addKeyListener(this);
         paint();        
@@ -52,19 +52,20 @@ public class GameView extends JFrame implements KeyListener{
        gridPanel = new JPanel();
        gridPanel.setLayout(null);
        this.add(gridPanel);
-       gridPanel.setBounds(0, 0, 360, 600);
+       gridPanel.setBounds(0, 0, 760, 600);
         FillGrid(); 
         updatePlayerLocation();
        
             
     }
+   
   
     public void FillGrid(){
       
-        for(int i=0; i<12; i++){
-          for(int j=0; j<18; j++){
-              if(!((j== 2 && i<10 && i >1)||(j == 3 && i<10 && i >1)|| (j == 8 && i<10 && i >1)||(j == 9 && i<10 && i >1)||(j == 14 && i<10 && i >1)||(j == 15 && i<10 && i >1)||(i == 5 && j<16 && j >2)||(i == 6 && j<16 && j >2))){
-             blackline = BorderFactory.createLineBorder(Color.black);
+        for(int i=0; i<24; i++){
+          for(int j=0; j<40; j++){
+              if(!((i==0)||(j==0)|| (i == 23)||(j == 40))){
+              blackline = BorderFactory.createLineBorder(Color.black);
               theNumberPanelArray[i][j] = new JPanel();
               theNumberPanelArray[i][j].setBorder(blackline);
               theNumberPanelArray[i][j].setBackground(Color.BLUE);
@@ -75,10 +76,10 @@ public class GameView extends JFrame implements KeyListener{
               theNumberPanelArray[i][j].setBorder(blackline);
               theNumberPanelArray[i][j].setBackground(Color.BLACK);
               }
-                int width = 30; // 30px wide
-                int height = 30;// 30px high 
-                int xLoc = i * 30; // 30px * the theMainGrid locale
-                int yLoc = j * 30; // 30px * the grid locale
+                int width = 12; // 30px wide
+                int height = 12;// 30px high 
+                int xLoc = i * 12; // 30px * the theMainGrid locale
+                int yLoc = j * 12; // 30px * the grid locale
                 
                 theNumberPanelArray[i][j].setBounds(xLoc, yLoc, width, height);
                this.gridPanel.add(theNumberPanelArray[i][j]);
@@ -95,7 +96,7 @@ public class GameView extends JFrame implements KeyListener{
          
       }
      public void lastColor(){
-        theNumberPanelArray[y][x].setBackground(Color.BLUE);
+        theNumberPanelArray[y][x].setBackground(Color.red);
      }
      
     
@@ -103,9 +104,9 @@ public class GameView extends JFrame implements KeyListener{
         @Override
    public void keyPressed(KeyEvent e) {
     
-         // 没写防错的code player会吃掉墙，也会越界
             
          if(e.getKeyCode() == KeyEvent.VK_LEFT){
+         
             if(y!=0){
                  lastColor();
                     y--;
@@ -152,6 +153,8 @@ public class GameView extends JFrame implements KeyListener{
     public void keyStopped(KeyEvent e) {
         
     }
+
+    
     }
 
   
