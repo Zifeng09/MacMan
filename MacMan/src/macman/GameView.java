@@ -57,7 +57,7 @@ public class GameView extends JFrame implements KeyListener{
        gridPanel.setBounds(0, 0, 900, 600);
         FillGrid(); 
         updatePlayerLocation();
-        initialenemy();
+        points();
        
             
     }
@@ -90,18 +90,25 @@ public class GameView extends JFrame implements KeyListener{
     }
     }
     
-    public void initialenemy(){
-    JPanel enemy =new JPanel();
-    JPanel clear =new JPanel();
+    public void points(){
+    JPanel point1 =new JPanel();
+    JPanel point2 =new JPanel();
+    JPanel point3 =new JPanel();
+    JPanel point4 =new JPanel();
 
-    enemy = theNumberPanelArray[j][k];
-    clear=theNumberPanelArray[j-1][k];
-    for(int j=9; j<20; j++){
-    clear.setBackground(Color.blue);
-    enemy.setBackground(Color.red);
-    }
-    
-    
+    point1 = theNumberPanelArray[9][9];
+    point2 = theNumberPanelArray[12][12];
+    point3 = theNumberPanelArray[15][15];
+    point4 = theNumberPanelArray[18][18];
+    point1.setBackground(Color.green);
+    point2.setBackground(Color.green);
+    point3.setBackground(Color.green);
+    point4.setBackground(Color.green);
+
+
+
+        
+
     
     }
       public void updatePlayerLocation(){
