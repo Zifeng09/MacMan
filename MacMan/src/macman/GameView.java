@@ -23,9 +23,11 @@ import javax.swing.border.Border;
 public class GameView extends JFrame implements KeyListener{
         int x = 0;
         int y = 0;
+        int j=9;
+        int k=9;
         JLabel bitcoin;
         ImageIcon BTC = new ImageIcon("Bitcoin_Logo.png");
-        JPanel gridPanel, playerPanel;
+        JPanel gridPanel, playerPanel, enemyPanel;
         GameController theGameController;
         GameView theGameView;
         JPanel[][] theNumberPanelArray = new JPanel[24][40];
@@ -39,7 +41,7 @@ public class GameView extends JFrame implements KeyListener{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 	this.setTitle("MACMAN BETA 0.1");
-        this.setSize(new Dimension(750,620));
+        this.setSize(new Dimension(288,500));
         this.setLayout(null);
         this.addKeyListener(this);
         paint();        
@@ -52,9 +54,10 @@ public class GameView extends JFrame implements KeyListener{
        gridPanel = new JPanel();
        gridPanel.setLayout(null);
        this.add(gridPanel);
-       gridPanel.setBounds(0, 0, 760, 600);
+       gridPanel.setBounds(0, 0, 900, 600);
         FillGrid(); 
         updatePlayerLocation();
+        initialenemy();
        
             
     }
@@ -64,18 +67,18 @@ public class GameView extends JFrame implements KeyListener{
       
         for(int i=0; i<24; i++){
           for(int j=0; j<40; j++){
-              if(!((i==0)||(j==0)|| (i == 23)||(j == 40))){
+             // if(!((j==1)||(i==20))){
               blackline = BorderFactory.createLineBorder(Color.black);
               theNumberPanelArray[i][j] = new JPanel();
               theNumberPanelArray[i][j].setBorder(blackline);
               theNumberPanelArray[i][j].setBackground(Color.BLUE);
             //  theNumberPanelArray[i][j].setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
               
-              }else{
+             /* }else{
               theNumberPanelArray[i][j] = new JPanel();
               theNumberPanelArray[i][j].setBorder(blackline);
               theNumberPanelArray[i][j].setBackground(Color.BLACK);
-              }
+              }*/
                 int width = 12; // 30px wide
                 int height = 12;// 30px high 
                 int xLoc = i * 12; // 30px * the theMainGrid locale
@@ -86,17 +89,58 @@ public class GameView extends JFrame implements KeyListener{
           }
     }
     }
+    
+    public void initialenemy(){
+    JPanel enemy =new JPanel();
+    JPanel clear =new JPanel();
+
+    enemy = theNumberPanelArray[j][k];
+    clear=theNumberPanelArray[j-1][k];
+    for(int j=9; j<20; j++){
+    clear.setBackground(Color.blue);
+    enemy.setBackground(Color.red);
+    }
+    
+    
+    
+    }
       public void updatePlayerLocation(){
           
          
          JPanel player = new JPanel();
          
-         player = theNumberPanelArray[y][x];
+         player = theNumberPanelArray[x][y];
          player.setBackground(Color.yellow);
          
       }
+      public void erasepastL(){
+      JPanel past=new JPanel();
+      past=theNumberPanelArray[0][y];
+      past.setBackground(Color.blue);
+      
+      }
+      public void erasepastR(){
+      JPanel past=new JPanel();
+      past=theNumberPanelArray[23][y];
+      past.setBackground(Color.blue);
+      
+      }
+      public void erasepastU(){
+      JPanel past=new JPanel();
+      past=theNumberPanelArray[x][0];
+      past.setBackground(Color.blue);
+      
+      }
+      public void erasepastD(){
+      JPanel past=new JPanel();
+      past=theNumberPanelArray[x][39];
+      past.setBackground(Color.blue);
+      
+      }
+      
+      
      public void lastColor(){
-        theNumberPanelArray[y][x].setBackground(Color.red);
+        theNumberPanelArray[x][y].setBackground(Color.blue);
      }
      
     
@@ -107,33 +151,55 @@ public class GameView extends JFrame implements KeyListener{
             
          if(e.getKeyCode() == KeyEvent.VK_LEFT){
          
-            if(y!=0){
+            if(x!=0){
                  lastColor();
-                    y--;
-                 updatePlayerLocation() ;
+                    x--;
+                 updatePlayerLocation();
             }
+            else{
+            erasepastL();
+            x=23;
+            updatePlayerLocation();
+            }
+         }
+         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+               if(x!=23){
+                lastColor();
+                 x++;
+                 updatePlayerLocation();
+               }    
+               else{
+               erasepastR();
+               x=0;
+               updatePlayerLocation();
+               }
          }
     
            if(e.getKeyCode() == KeyEvent.VK_UP){
-             if(x!=0){
+             if(y!=0){
                 lastColor();
-                    x--;
-                 updatePlayerLocation() ;
+                 y--;
+                 updatePlayerLocation();
              }  
+             else{
+             erasepastU();
+             y=39;
+             updatePlayerLocation();
+             }
          }
-           if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-               if(y!=11){
-                lastColor();
-                    y++;
-                 updatePlayerLocation() ;
-               }    
-         }
+           
             if(e.getKeyCode() == KeyEvent.VK_DOWN){
-                if(x!=17){
+                if(y!=39){
                 lastColor();
-                   x++;
+                 y++;
                  updatePlayerLocation() ;
                 }   
+                else{
+                    y=0;
+                    erasepastD();
+                    updatePlayerLocation() ;
+
+                }
          }
         repaint();
             
