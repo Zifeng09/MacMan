@@ -14,6 +14,7 @@ import javax.swing.JFrame;
  */
 public class GameController {
     private GameView theGameView = null;
+    private GameThread theGameThread;
     
     
   public GameController(){
@@ -22,7 +23,14 @@ public class GameController {
         theGameView.setVisible(true);
         theGameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         theGameView.setLocationRelativeTo(null);
+        theGameThread = new GameThread(this);
+        theGameThread.start();
+//        theGameThread.run();
        
       
+  }
+  
+  public void update() {
+      theGameView.updateEnemies();
   }
 }

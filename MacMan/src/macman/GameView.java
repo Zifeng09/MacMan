@@ -20,20 +20,23 @@ import javax.swing.border.Border;
  *
  * @author N9864
  */
-public class GameView extends JFrame implements KeyListener{
-        int x = 0;
-        int y = 0;
+public class GameView extends JFrame implements KeyListener {
+    public static final int boardWidth = 24;
+    public static final int boardHeight = 40;
+        int playerX = 0;
+        int playerY = 0;
         int j=9;
         int k=9;
         JLabel bitcoin;
         ImageIcon BTC = new ImageIcon("Bitcoin_Logo.png");
         JPanel gridPanel, playerPanel, enemyPanel;
         GameController theGameController;
-        GameView theGameView;
-        JPanel[][] theNumberPanelArray = new JPanel[24][40];
+        //GameView theGameView;
+        JPanel[][] theNumberPanelArray = new JPanel[boardWidth][boardHeight];
         Border blackline;
         private ArrayList<KeyEvent> keysDown;  
         private boolean isWall = false;
+        private Enemy[] enemies;
         
     public GameView(GameController theParentGameController){
         
@@ -41,10 +44,13 @@ public class GameView extends JFrame implements KeyListener{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 	this.setTitle("MACMAN BETA 0.1");
-        this.setSize(new Dimension(288,500));
+        this.setSize(new Dimension(305, 500));
         this.setLayout(null);
         this.addKeyListener(this);
-        paint();        
+        this.enemies = new Enemy[1];
+        this.enemies[0] = new Enemy();
+        this.paint();
+        //this.pack();
 
        
     }
@@ -111,44 +117,69 @@ public class GameView extends JFrame implements KeyListener{
 
     
     }
-      public void updatePlayerLocation(){
-          
-         
-         JPanel player = new JPanel();
-         
-         player = theNumberPanelArray[x][y];
-         player.setBackground(Color.yellow);
-         
-      }
-      public void erasepastL(){
-      JPanel past=new JPanel();
-      past=theNumberPanelArray[0][y];
-      past.setBackground(Color.blue);
+    public void updateEnemies() {
+        for(int i = 0; i < enemies.length; i++) {
+            theNumberPanelArray[enemies[i].xPos][enemies[i].yPos].setBackground(Color.BLUE);
+            enemies[i].moveUp();
+            theNumberPanelArray[enemies[i].xPos][enemies[i].yPos].setBackground(Color.RED);
+            if(playerX == enemies[i].xPos && playerY == enemies[i].yPos) {
+                collision();
+            }
+        }
+
+    }
+    
+    
+    public void updatePlayerLocation(){
+       JPanel player = new JPanel();
+
+       player = theNumberPanelArray[playerX][playerY];
+       player.setBackground(Color.yellow);
+       checkCollision();
+    }
+    
+    public void checkCollision() {
+        for(int i = 0; i < enemies.length; i++) {
+            if(playerX == enemies[i].xPos && playerY == enemies[i].yPos) {
+                collision();
+            }
+        }
+    }
+    
+    public void collision() {
+        System.out.println("Game Over");
+        System.exit(0);
+    }
       
-      }
-      public void erasepastR(){
-      JPanel past=new JPanel();
-      past=theNumberPanelArray[23][y];
-      past.setBackground(Color.blue);
-      
-      }
-      public void erasepastU(){
-      JPanel past=new JPanel();
-      past=theNumberPanelArray[x][0];
-      past.setBackground(Color.blue);
-      
-      }
-      public void erasepastD(){
-      JPanel past=new JPanel();
-      past=theNumberPanelArray[x][39];
-      past.setBackground(Color.blue);
-      
-      }
-      
-      
-     public void lastColor(){
-        theNumberPanelArray[x][y].setBackground(Color.blue);
-     }
+    public void erasepastL(){
+        JPanel past=new JPanel();
+        past=theNumberPanelArray[0][playerY];
+        past.setBackground(Color.blue);
+
+    }
+    public void erasepastR(){
+        JPanel past=new JPanel();
+        past=theNumberPanelArray[23][playerY];
+        past.setBackground(Color.blue);
+
+    }
+    public void erasepastU(){
+        JPanel past=new JPanel();
+        past=theNumberPanelArray[playerX][0];
+        past.setBackground(Color.blue);
+
+    }
+    public void erasepastD(){
+        JPanel past=new JPanel();
+        past=theNumberPanelArray[playerX][39];
+        past.setBackground(Color.blue);
+
+    }
+
+
+    public void lastColor(){
+       theNumberPanelArray[playerX][playerY].setBackground(Color.blue);
+    }
      
     
     
@@ -158,51 +189,51 @@ public class GameView extends JFrame implements KeyListener{
             
          if(e.getKeyCode() == KeyEvent.VK_LEFT){
          
-            if(x!=0){
+            if(playerX!=0){
                  lastColor();
-                    x--;
+                    playerX--;
                  updatePlayerLocation();
             }
             else{
             erasepastL();
-            x=23;
+            playerX=23;
             updatePlayerLocation();
             }
          }
          if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-               if(x!=23){
+               if(playerX!=23){
                 lastColor();
-                 x++;
+                 playerX++;
                  updatePlayerLocation();
                }    
                else{
                erasepastR();
-               x=0;
+               playerX=0;
                updatePlayerLocation();
                }
          }
     
            if(e.getKeyCode() == KeyEvent.VK_UP){
-             if(y!=0){
+             if(playerY!=0){
                 lastColor();
-                 y--;
+                 playerY--;
                  updatePlayerLocation();
              }  
              else{
              erasepastU();
-             y=39;
+             playerY=39;
              updatePlayerLocation();
              }
          }
            
             if(e.getKeyCode() == KeyEvent.VK_DOWN){
-                if(y!=39){
+                if(playerY!=39){
                 lastColor();
-                 y++;
+                 playerY++;
                  updatePlayerLocation() ;
                 }   
                 else{
-                    y=0;
+                    playerY=0;
                     erasepastD();
                     updatePlayerLocation() ;
 

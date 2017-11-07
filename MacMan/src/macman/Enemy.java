@@ -13,10 +13,48 @@ import java.awt.Color;
 import java.util.*;
 
 public class Enemy {
+    int xPos = 10;
+    int yPos = 15;
     Score theScore;
     
+    //idk
     public Enemy(int theScore){
         
     }
     
+    public Enemy() {
+        
+    }
+    
+    public void move(int desiredX, int desiredY) {
+        this.xPos = desiredX;
+        this.yPos = desiredY;
+    }
+    
+    public void moveLeft() {
+        xPos--;
+        if(xPos < 0){
+            xPos = GameView.boardWidth - 1;
+        }
+    }
+    
+    public void moveRight() {
+        xPos++;
+        if(xPos > GameView.boardWidth - 1){
+            xPos = 0;
+        }
+    }
+    public void moveUp() {
+        yPos--;
+        if(yPos < 0) {
+            yPos = GameView.boardHeight - 1;
+        }
+    }
+    
+    public void moveDown() {
+        yPos++;
+        if(yPos > GameView.boardHeight - 1) {
+            yPos = 0;
+        }
+    }
 }
