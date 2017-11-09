@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 public class GameController {
     private GameView theGameView = null;
     private GameThread theGameThread;
+    MenuController theMenuCntl;
     
     
   public GameController(){
@@ -32,5 +33,9 @@ public class GameController {
   
   public void update() {
       theGameView.updateEnemies();
+  }
+  public void backmenu(){
+    theMenuCntl = new MenuController();
+  
   }
 }

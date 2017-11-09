@@ -16,6 +16,9 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.KeyListener;
 import javax.swing.border.Border;
+import javax.swing.JOptionPane;
+import java.util.Random;
+
 /**
  *
  * @author N9864
@@ -48,7 +51,9 @@ public class GameView extends JFrame implements KeyListener {
         this.setLayout(null);
         this.addKeyListener(this);
         this.enemies = new Enemy[1];
+        
         this.enemies[0] = new Enemy();
+       
         this.paint();
         //this.pack();
 
@@ -119,14 +124,64 @@ public class GameView extends JFrame implements KeyListener {
     }
     public void updateEnemies() {
         for(int i = 0; i < enemies.length; i++) {
-            theNumberPanelArray[enemies[i].xPos][enemies[i].yPos].setBackground(Color.BLUE);
-            enemies[i].moveUp();
-            theNumberPanelArray[enemies[i].xPos][enemies[i].yPos].setBackground(Color.RED);
-            if(playerX == enemies[i].xPos && playerY == enemies[i].yPos) {
-                collision();
+            Random rand = new Random();
+            int n = rand.nextInt(4)+1;
+            System.out.println(n);
+            
+            switch(n){
+            
+              case 1:
+              theNumberPanelArray[enemies[i].xPos][enemies[i].yPos].setBackground(Color.BLUE);
+            
+              enemies[i].moveUp();
+              theNumberPanelArray[enemies[i].xPos][enemies[i].yPos].setBackground(Color.RED);
+              if(playerX == enemies[i].xPos && playerY == enemies[i].yPos) {
+                collision();     
             }
+              break;
+              
+              
+              case 2:
+        
+              theNumberPanelArray[enemies[i].xPos][enemies[i].yPos].setBackground(Color.BLUE);
+            
+              enemies[i].moveDown();
+              theNumberPanelArray[enemies[i].xPos][enemies[i].yPos].setBackground(Color.RED);
+              if(playerX == enemies[i].xPos && playerY == enemies[i].yPos) {
+                collision();     
+            }
+              break;    
+            
+              
+              case 3:
+        
+              theNumberPanelArray[enemies[i].xPos][enemies[i].yPos].setBackground(Color.BLUE);
+            
+              enemies[i].moveLeft();
+              theNumberPanelArray[enemies[i].xPos][enemies[i].yPos].setBackground(Color.RED);
+              if(playerX == enemies[i].xPos && playerY == enemies[i].yPos) {
+                collision();     
+            }
+              break;
+              
+              
+              case 4:
+        
+              theNumberPanelArray[enemies[i].xPos][enemies[i].yPos].setBackground(Color.BLUE);
+            
+              enemies[i].moveRight();
+              theNumberPanelArray[enemies[i].xPos][enemies[i].yPos].setBackground(Color.RED);
+              if(playerX == enemies[i].xPos && playerY == enemies[i].yPos) {
+                collision();     
+            }
+              break;
+            
+            
+          
+            
         }
 
+        }
     }
     
     
@@ -147,8 +202,9 @@ public class GameView extends JFrame implements KeyListener {
     }
     
     public void collision() {
-        System.out.println("Game Over");
-        System.exit(0);
+        JOptionPane.showMessageDialog(null, "game over");
+        theGameController.backmenu();
+        this.setVisible(false);
     }
       
     public void erasepastL(){
