@@ -11,10 +11,12 @@ package macman;
  */
 import java.awt.Color;
 import java.util.*;
+import java.util.Random;
 
 public class Enemy {
-    int xPos = 10;
-    int yPos = 15;
+    Random rand = new Random();
+    int xPos = rand.nextInt(18)+1;
+    int yPos = rand.nextInt(18)+1;
     Score theScore;
     
     //idk

@@ -24,8 +24,8 @@ import java.util.Random;
  * @author N9864
  */
 public class GameView extends JFrame implements KeyListener {
-    public static final int boardWidth = 24;
-    public static final int boardHeight = 40;
+    public static final int boardWidth = 20;
+    public static final int boardHeight = 20;
         int playerX = 0;
         int playerY = 0;
         int j=9;
@@ -47,12 +47,15 @@ public class GameView extends JFrame implements KeyListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 	this.setTitle("MACMAN BETA 0.1");
-        this.setSize(new Dimension(305, 500));
+        this.setSize(new Dimension(315, 340));
         this.setLayout(null);
         this.addKeyListener(this);
-        this.enemies = new Enemy[1];
+        this.enemies = new Enemy[4];
         
         this.enemies[0] = new Enemy();
+        this.enemies[1] = new Enemy();
+        this.enemies[2] = new Enemy();
+        this.enemies[3] = new Enemy();
        
         this.paint();
         //this.pack();
@@ -65,7 +68,7 @@ public class GameView extends JFrame implements KeyListener {
        gridPanel = new JPanel();
        gridPanel.setLayout(null);
        this.add(gridPanel);
-       gridPanel.setBounds(0, 0, 900, 600);
+       gridPanel.setBounds(0, 0, 680, 680);
         FillGrid(); 
         updatePlayerLocation();
         points();
@@ -76,8 +79,8 @@ public class GameView extends JFrame implements KeyListener {
   
     public void FillGrid(){
       
-        for(int i=0; i<24; i++){
-          for(int j=0; j<40; j++){
+        for(int i=0; i<20; i++){
+          for(int j=0; j<20; j++){
              // if(!((j==1)||(i==20))){
               blackline = BorderFactory.createLineBorder(Color.black);
               theNumberPanelArray[i][j] = new JPanel();
@@ -90,10 +93,10 @@ public class GameView extends JFrame implements KeyListener {
               theNumberPanelArray[i][j].setBorder(blackline);
               theNumberPanelArray[i][j].setBackground(Color.BLACK);
               }*/
-                int width = 12; // 30px wide
-                int height = 12;// 30px high 
-                int xLoc = i * 12; // 30px * the theMainGrid locale
-                int yLoc = j * 12; // 30px * the grid locale
+                int width = 15; // 30px wide
+                int height = 15;// 30px high 
+                int xLoc = i * 15; // 30px * the theMainGrid locale
+                int yLoc = j * 15; // 30px * the grid locale
                 
                 theNumberPanelArray[i][j].setBounds(xLoc, yLoc, width, height);
                this.gridPanel.add(theNumberPanelArray[i][j]);
@@ -102,11 +105,23 @@ public class GameView extends JFrame implements KeyListener {
     }
     
     public void points(){
-    JPanel point1 =new JPanel();
+    int numberOfPoints = 25;
+    
+    for(int d=0; d<numberOfPoints; d++){
+         JPanel point =new JPanel();
+         Random rand = new Random();
+         int w = rand.nextInt(18)+1;
+         int y = rand.nextInt(18)+1;
+         point = theNumberPanelArray[w][y];
+         point.setBackground(Color.green);
+    }     
+        
+   /* JPanel point1 =new JPanel();
     JPanel point2 =new JPanel();
     JPanel point3 =new JPanel();
     JPanel point4 =new JPanel();
-
+    
+    
     point1 = theNumberPanelArray[9][9];
     point2 = theNumberPanelArray[12][12];
     point3 = theNumberPanelArray[15][15];
@@ -114,12 +129,11 @@ public class GameView extends JFrame implements KeyListener {
     point1.setBackground(Color.green);
     point2.setBackground(Color.green);
     point3.setBackground(Color.green);
-    point4.setBackground(Color.green);
+    point4.setBackground(Color.green);*/
 
 
 
-        
-
+    
     
     }
     public void updateEnemies() {
@@ -215,7 +229,7 @@ public class GameView extends JFrame implements KeyListener {
     }
     public void erasepastR(){
         JPanel past=new JPanel();
-        past=theNumberPanelArray[23][playerY];
+        past=theNumberPanelArray[19][playerY];
         past.setBackground(Color.blue);
 
     }
@@ -227,7 +241,7 @@ public class GameView extends JFrame implements KeyListener {
     }
     public void erasepastD(){
         JPanel past=new JPanel();
-        past=theNumberPanelArray[playerX][39];
+        past=theNumberPanelArray[playerX][19];
         past.setBackground(Color.blue);
 
     }
@@ -252,12 +266,12 @@ public class GameView extends JFrame implements KeyListener {
             }
             else{
             erasepastL();
-            playerX=23;
+            playerX=19;
             updatePlayerLocation();
             }
          }
          if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-               if(playerX!=23){
+               if(playerX!=19){
                 lastColor();
                  playerX++;
                  updatePlayerLocation();
@@ -277,13 +291,13 @@ public class GameView extends JFrame implements KeyListener {
              }  
              else{
              erasepastU();
-             playerY=39;
+             playerY=19;
              updatePlayerLocation();
              }
          }
            
             if(e.getKeyCode() == KeyEvent.VK_DOWN){
-                if(playerY!=39){
+                if(playerY!=19){
                 lastColor();
                  playerY++;
                  updatePlayerLocation() ;
