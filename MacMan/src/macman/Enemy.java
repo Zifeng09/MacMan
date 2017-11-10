@@ -15,8 +15,8 @@ import java.util.Random;
 
 public class Enemy {
     Random rand = new Random();
-    int xPos = rand.nextInt(18)+1;
-    int yPos = rand.nextInt(18)+1;
+    int xPos = rand.nextInt(17)+1;
+    int yPos = rand.nextInt(17)+1;
     Score theScore;
     
     //idk
