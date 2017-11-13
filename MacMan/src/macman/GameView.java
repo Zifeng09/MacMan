@@ -26,11 +26,14 @@ import java.util.Random;
 public class GameView extends JFrame implements KeyListener {
     public static final int boardWidth = 20;
     public static final int boardHeight = 20;
+    playerUI thePlayerUI = new playerUI();
+    
         int playerX = 0;
         int playerY = 0;
         int j=9;
         int k=9;
         JLabel bitcoin;
+        JPanel grandPanel = new JPanel();
         ImageIcon BTC = new ImageIcon("Bitcoin_Logo.png");
         JPanel gridPanel, playerPanel, enemyPanel;
         GameController theGameController;
@@ -44,18 +47,22 @@ public class GameView extends JFrame implements KeyListener {
     public GameView(GameController theParentGameController){
         
         theGameController = theParentGameController;
+        
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 	this.setTitle("MACMAN BETA 0.1");
-        this.setSize(new Dimension(315, 340));
-        this.setLayout(null);
+        this.setSize(new Dimension(500, 340));
+        this.setLayout(new BorderLayout());
         this.addKeyListener(this);
+
         this.enemies = new Enemy[4];
-        
         this.enemies[0] = new Enemy();
         this.enemies[1] = new Enemy();
         this.enemies[2] = new Enemy();
         this.enemies[3] = new Enemy();
+        
+        
+        
        
         this.paint();
         //this.pack();
@@ -67,8 +74,14 @@ public class GameView extends JFrame implements KeyListener {
       
        gridPanel = new JPanel();
        gridPanel.setLayout(null);
-       this.add(gridPanel);
-       gridPanel.setBounds(0, 0, 680, 680);
+       gridPanel.setSize(new Dimension(315,340));
+       gridPanel.setFocusable(true);
+      
+       JPanel thePlayerPanel = thePlayerUI.getPanel();
+       thePlayerPanel.setSize(185,340);
+       this.add(gridPanel,BorderLayout.CENTER);
+       this.add(thePlayerUI.getPanel(),BorderLayout.EAST);
+        gridPanel.addKeyListener(this);
         FillGrid(); 
         updatePlayerLocation();
         points();
