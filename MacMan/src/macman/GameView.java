@@ -79,6 +79,7 @@ public class GameView extends JFrame implements KeyListener {
       
        JPanel thePlayerPanel = thePlayerUI.getPanel();
        thePlayerPanel.setSize(185,340);
+       
        this.add(gridPanel,BorderLayout.CENTER);
        this.add(thePlayerUI.getPanel(),BorderLayout.EAST);
         gridPanel.addKeyListener(this);

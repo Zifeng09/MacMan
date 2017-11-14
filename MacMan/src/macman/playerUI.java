@@ -18,6 +18,11 @@ public class playerUI extends javax.swing.JFrame {
      */
     public playerUI() {
         initComponents();
+        levelButton.setVisible(false);
+    }
+    
+    public void nextLevel(){
+        levelButton.setVisible(true);
     }
     
     public JPanel getPanel(){
