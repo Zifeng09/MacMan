@@ -155,7 +155,7 @@ public class GameView extends JFrame implements KeyListener {
         }    
     }
     
-    public void FillGrid(){
+    public void FillGrid(int level){
       
         for(int i=0; i<20; i++){
           for(int j=0; j<20; j++){
@@ -318,7 +318,7 @@ public class GameView extends JFrame implements KeyListener {
     
     
      public void nextLevel(int level){
-        //this.FillGrid(level);
+        this.FillGrid(level);
         this.points();
         this.revalidate();
         this.repaint();
