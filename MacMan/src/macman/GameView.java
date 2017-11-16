@@ -55,11 +55,13 @@ public class GameView extends JFrame implements KeyListener {
         this.setLayout(new BorderLayout());
         this.addKeyListener(this);
 
-        this.enemies = new Enemy[4];
+        this.enemies = new Enemy[6];
         this.enemies[0] = new Enemy();
         this.enemies[1] = new Enemy();
         this.enemies[2] = new Enemy();
         this.enemies[3] = new Enemy();
+        this.enemies[4] = new Enemy();
+        this.enemies[5] = new Enemy();
         
         
         
@@ -83,10 +85,10 @@ public class GameView extends JFrame implements KeyListener {
        this.add(gridPanel,BorderLayout.CENTER);
        this.add(thePlayerUI.getPanel(),BorderLayout.EAST);
         gridPanel.addKeyListener(this);
-        FillGrid(); 
-        
+        FillGrid();  
         points();
         updatePlayerLocation();
+        
             
     }
    
@@ -143,11 +145,7 @@ public class GameView extends JFrame implements KeyListener {
     point1.setBackground(Color.green);
     point2.setBackground(Color.green);
     point3.setBackground(Color.green);
-    point4.setBackground(Color.green);*/
-
-
-
-    
+    point4.setBackground(Color.green);*/  
     
     }
     public void updateEnemies() {
@@ -212,14 +210,13 @@ public class GameView extends JFrame implements KeyListener {
         }
     }
     
-    
     public void updatePlayerLocation(){
        JPanel player = new JPanel();
 
        player = theNumberPanelArray[playerX][playerY];
        player.setBackground(Color.yellow);
        checkCollision();
-       chechVicotry();
+       checkVictory();
     }
     
     public void checkCollision() {
@@ -230,7 +227,7 @@ public class GameView extends JFrame implements KeyListener {
         }
     }
     
-    public void chechVicotry(){
+    public void checkVictory(){
         
         int touch =0;
         for(int i=0; i<20; i++){

@@ -10,7 +10,7 @@ package macman;
  * @author mpk5206
  */
 public class GameThread extends Thread {
-    private int tickRate = 1; //updates per sec
+    private int tickRate = 3; //updates per sec
     private GameController parentController;
     
     public GameThread(GameController gameController) {
