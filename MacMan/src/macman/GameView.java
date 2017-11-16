@@ -35,15 +35,17 @@ public class GameView extends JFrame implements KeyListener {
         JLabel bitcoin;
         JPanel grandPanel = new JPanel();
         ImageIcon BTC = new ImageIcon("Bitcoin_Logo.png");
-        JPanel gridPanel, playerPanel, enemyPanel;
+        JPanel playerPanel;
+        JPanel enemyPanel;
         GameController theGameController;
+        GamePanel gamePanel;
         //GameView theGameView;
-        JPanel[][] theNumberPanelArray = new JPanel[boardWidth][boardHeight];
         Border blackline;
         private ArrayList<KeyEvent> keysDown;  
         private boolean isWall = false;
         private Enemy[] enemies;
         int level =1; 
+        
     public GameView(GameController theParentGameController){
         
         theGameController = theParentGameController;
@@ -74,215 +76,89 @@ public class GameView extends JFrame implements KeyListener {
      
     private void paint() {
        thePlayerUI = new playerUI(theGameController);
-       gridPanel = new JPanel();
-       gridPanel.setLayout(null);
-       gridPanel.setSize(new Dimension(315,340));
-       gridPanel.setFocusable(true);
+       gamePanel = new GamePanel();
+       gamePanel.setSize(new Dimension(315,340));
+       gamePanel.setFocusable(true);
       
        JPanel thePlayerPanel = thePlayerUI.getPanel();
        thePlayerPanel.setSize(185,340);
        
-       this.add(gridPanel,BorderLayout.CENTER);
+       this.add(gamePanel,BorderLayout.CENTER);
        this.add(thePlayerUI.getPanel(),BorderLayout.EAST);
-        gridPanel.addKeyListener(this);
-        FillGrid();  
-        buildWall();
-        points();
-        updatePlayerLocation();
+        
+//        FillGrid(1);  
+//        buildWall();
+//        points();
+//        updatePlayerLocation();
         
             
     }
     
     
    
-    public void buildWall(){
-       int i = 1;
-        Border whiteline;
-        whiteline = BorderFactory.createLineBorder(Color.white);
-        while(i == 1){
-            for(int j = 0; j<= 14; j++){
-                theNumberPanelArray[i][j].setBorder(whiteline);
-                theNumberPanelArray[i][j].setBackground(Color.BLACK);
-            }
-            i = 9;
-        }
-        while(i == 9){
-            for(int j = 2; j<= 12; j++){
-                theNumberPanelArray[j][i].setBorder(whiteline);
-                theNumberPanelArray[j][i].setBackground(Color.BLACK);
-        }
-            i = 14;
-        }
-        
-        while(i == 14){
-            for(int j = 4; j<= 10; j++){
-                theNumberPanelArray[j][i].setBorder(whiteline);
-                theNumberPanelArray[j][i].setBackground(Color.BLACK);
-        }
-            for(int j = 11; j < 18; j++){
-                theNumberPanelArray[i][j].setBorder(whiteline);
-                theNumberPanelArray[i][j].setBackground(Color.BLACK);
-            }
-            i = 11;
-    }
-        while(i == 11){
-              for(int j = 12; j < 20; j++){
-                theNumberPanelArray[i][j].setBorder(whiteline);
-                theNumberPanelArray[i][j].setBackground(Color.BLACK);
-            }
-              i = 5;
-        }
-        while(i == 5){
-              for(int j = 0; j <= 6; j++){
-                theNumberPanelArray[i][j].setBorder(whiteline);
-                theNumberPanelArray[i][j].setBackground(Color.BLACK);
-            }
-              i = 3;
-        }
-        while(i == 3){
-            for(int j = 6; j <= 15; j++){
-                theNumberPanelArray[j][i].setBorder(whiteline);
-                theNumberPanelArray[j][i].setBackground(Color.BLACK);
-            }
-            i = 6;
-        }
-        while(i == 6){
-            for(int j = 10; j < 20; j++){
-                theNumberPanelArray[j][i].setBorder(whiteline);
-                theNumberPanelArray[j][i].setBackground(Color.BLACK);
-            }
-            i = 0;
-        }    
-    }
-    
-    public void FillGrid(int level){
-      
-        for(int i=0; i<20; i++){
-          for(int j=0; j<20; j++){
-             // if(!((j==1)||(i==20))){
-              blackline = BorderFactory.createLineBorder(Color.black);
-              theNumberPanelArray[i][j] = new JPanel();
-              theNumberPanelArray[i][j].setBorder(blackline);
-              theNumberPanelArray[i][j].setBackground(Color.BLUE);
-            //  theNumberPanelArray[i][j].setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-              
-             /* }else{
-              theNumberPanelArray[i][j] = new JPanel();
-              theNumberPanelArray[i][j].setBorder(blackline);
-              theNumberPanelArray[i][j].setBackground(Color.BLACK);
-              }*/
-                int width = 15; // 30px wide
-                int height = 15;// 30px high 
-                int xLoc = i * 15; // 30px * the theMainGrid locale
-                int yLoc = j * 15; // 30px * the grid locale
-                
-                theNumberPanelArray[i][j].setBounds(xLoc, yLoc, width, height);
-               this.gridPanel.add(theNumberPanelArray[i][j]);
-          }
-    }
-        
-        
-        
-    }
-    
-    public void points(){
-    int numberOfPoints = 2;
-    
-    for(int d=0; d<numberOfPoints; d++){
-         JPanel point =new JPanel();
-         Random rand = new Random();
-         int w = rand.nextInt(18)+1;
-         int y = rand.nextInt(18)+1;
-         point = theNumberPanelArray[w][y];
-         point.setBackground(Color.green);
-    }     
-        
-   /* JPanel point1 =new JPanel();
-    JPanel point2 =new JPanel();
-    JPanel point3 =new JPanel();
-    JPanel point4 =new JPanel();
-    
-    
-    point1 = theNumberPanelArray[9][9];
-    point2 = theNumberPanelArray[12][12];
-    point3 = theNumberPanelArray[15][15];
-    point4 = theNumberPanelArray[18][18];
-    point1.setBackground(Color.green);
-    point2.setBackground(Color.green);
-    point3.setBackground(Color.green);
-    point4.setBackground(Color.green);*/  
-    
-    }
-    public void updateEnemies() {
-        for(int i = 0; i < enemies.length; i++) {
-            Random rand = new Random();
-            int n = rand.nextInt(4)+1;
-            System.out.println(n);
-            
-            switch(n){
-            
-              case 1:
-              theNumberPanelArray[enemies[i].xPos][enemies[i].yPos].setBackground(Color.BLUE);
-            
-              enemies[i].moveUp();
-              theNumberPanelArray[enemies[i].xPos][enemies[i].yPos].setBackground(Color.RED);
-              if(playerX == enemies[i].xPos && playerY == enemies[i].yPos) {
-                collision();     
-            }
-              break;
-              
-              
-              case 2:
-        
-              theNumberPanelArray[enemies[i].xPos][enemies[i].yPos].setBackground(Color.BLUE);
-            
-              enemies[i].moveDown();
-              theNumberPanelArray[enemies[i].xPos][enemies[i].yPos].setBackground(Color.RED);
-              if(playerX == enemies[i].xPos && playerY == enemies[i].yPos) {
-                collision();     
-            }
-              break;    
-            
-              
-              case 3:
-        
-              theNumberPanelArray[enemies[i].xPos][enemies[i].yPos].setBackground(Color.BLUE);
-            
-              enemies[i].moveLeft();
-              theNumberPanelArray[enemies[i].xPos][enemies[i].yPos].setBackground(Color.RED);
-              if(playerX == enemies[i].xPos && playerY == enemies[i].yPos) {
-                collision();     
-            }
-              break;
-              
-              
-              case 4:
-        
-              theNumberPanelArray[enemies[i].xPos][enemies[i].yPos].setBackground(Color.BLUE);
-            
-              enemies[i].moveRight();
-              theNumberPanelArray[enemies[i].xPos][enemies[i].yPos].setBackground(Color.RED);
-              if(playerX == enemies[i].xPos && playerY == enemies[i].yPos) {
-              
-                  collision();     
-            }
-              break;
-            
-            
-          
-            
-        }
 
-        }
+    
+//    public void FillGrid(int level){
+//      
+//        for(int i=0; i<20; i++){
+//          for(int j=0; j<20; j++){
+//             // if(!((j==1)||(i==20))){
+//              blackline = BorderFactory.createLineBorder(Color.black);
+//              theNumberPanelArray[i][j] = new JPanel();
+//              theNumberPanelArray[i][j].setBorder(blackline);
+//              theNumberPanelArray[i][j].setBackground(Color.BLUE);
+//            //  theNumberPanelArray[i][j].setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+//              
+//             /* }else{
+//              theNumberPanelArray[i][j] = new JPanel();
+//              theNumberPanelArray[i][j].setBorder(blackline);
+//              theNumberPanelArray[i][j].setBackground(Color.BLACK);
+//              }*/
+//                int width = 15; // 30px wide
+//                int height = 15;// 30px high 
+//                int xLoc = i * 15; // 30px * the theMainGrid locale
+//                int yLoc = j * 15; // 30px * the grid locale
+//                
+//                theNumberPanelArray[i][j].setBounds(xLoc, yLoc, width, height);
+//               this.gamePanel.add(theNumberPanelArray[i][j]);
+//          }
+//    }
+    
+//    public void points(){
+////    int numberOfPoints = 2;
+////    
+////    for(int d=0; d<numberOfPoints; d++){
+////         JPanel point =new JPanel();
+////         Random rand = new Random();
+////         int w = rand.nextInt(18)+1;
+////         int y = rand.nextInt(18)+1;
+////         point = theNumberPanelArray[w][y];
+////         point.setBackground(Color.green);
+////    }     
+//
+//        
+//   /* JPanel point1 =new JPanel();
+//    JPanel point2 =new JPanel();
+//    JPanel point3 =new JPanel();
+//    JPanel point4 =new JPanel();
+//    
+//    
+//    point1 = theNumberPanelArray[9][9];
+//    point2 = theNumberPanelArray[12][12];
+//    point3 = theNumberPanelArray[15][15];
+//    point4 = theNumberPanelArray[18][18];
+//    point1.setBackground(Color.green);
+//    point2.setBackground(Color.green);
+//    point3.setBackground(Color.green);
+//    point4.setBackground(Color.green);*/  
+//    
+//    }
+    public void updateEnemies() {
+        gamePanel.updateEnemies();
     }
     
     public void updatePlayerLocation(){
-       JPanel player = new JPanel();
-
-       player = theNumberPanelArray[playerX][playerY];
-       player.setBackground(Color.yellow);
-       checkCollision();
-       checkVictory();
+       gamePanel.updatePlayerLocation();
     }
     
     public void checkCollision() {
@@ -294,34 +170,31 @@ public class GameView extends JFrame implements KeyListener {
     }
     
     public void checkVictory(){
-        
-        int touch =0;
-        for(int i=0; i<20; i++){
-            for(int j=0; j<20; j++){
-                if(theNumberPanelArray[i][j].getBackground() != Color.GREEN){
-                    
-                
-                touch +=1;
-                }
-            }
-                    
-        }
-        
-         if(touch == 400){
-                JOptionPane.showMessageDialog(null, "win");
-                theGameController.levelCompleted();
-         }
-        
+//        
+//        int touch =0;
+//        for(int i=0; i<20; i++){
+//            for(int j=0; j<20; j++){
+//                if(theNumberPanelArray[i][j].getBackground() != Color.GREEN){
+//                    
+//                
+//                touch +=1;
+//                }
+//            }
+//                    
+//        }
+//        
+//         if(touch == 400){
+//                JOptionPane.showMessageDialog(null, "win");
+//                theGameController.levelCompleted();
+//         }
+//        
     }
     
     
     
     
      public void nextLevel(int level){
-        this.FillGrid(level);
-        this.points();
-        this.revalidate();
-        this.repaint();
+         gamePanel = new GamePanel();
   
   }
     
@@ -332,101 +205,101 @@ public class GameView extends JFrame implements KeyListener {
         this.setVisible(false);
     }
       
-    public void erasepastL(){
-        JPanel past=new JPanel();
-        past=theNumberPanelArray[0][playerY];
-        past.setBackground(Color.blue);
-
-    }
-    public void erasepastR(){
-        JPanel past=new JPanel();
-        past=theNumberPanelArray[19][playerY];
-        past.setBackground(Color.blue);
-
-    }
-    public void erasepastU(){
-        JPanel past=new JPanel();
-        past=theNumberPanelArray[playerX][0];
-        past.setBackground(Color.blue);
-
-    }
-    public void erasepastD(){
-        JPanel past=new JPanel();
-        past=theNumberPanelArray[playerX][19];
-        past.setBackground(Color.blue);
-
-    }
-
-
-    public void lastColor(){
-       theNumberPanelArray[playerX][playerY].setBackground(Color.blue);
-    }
+//    public void erasepastL(){
+//        JPanel past=new JPanel();
+//        past=theNumberPanelArray[0][playerY];
+//        past.setBackground(Color.blue);
+//
+//    }
+//    public void erasepastR(){
+//        JPanel past=new JPanel();
+//        past=theNumberPanelArray[19][playerY];
+//        past.setBackground(Color.blue);
+//
+//    }
+//    public void erasepastU(){
+//        JPanel past=new JPanel();
+//        past=theNumberPanelArray[playerX][0];
+//        past.setBackground(Color.blue);
+//
+//    }
+//    public void erasepastD(){
+//        JPanel past=new JPanel();
+//        past=theNumberPanelArray[playerX][19];
+//        past.setBackground(Color.blue);
+//
+//    }
+//
+//
+//    public void lastColor(){
+//       theNumberPanelArray[playerX][playerY].setBackground(Color.blue);
+//    }
      
     
     
         @Override
-   public void keyPressed(KeyEvent e) {
-    
-            
-         if(e.getKeyCode() == KeyEvent.VK_LEFT){
-         
-            if(playerX!=0){
-                 lastColor();
-                    playerX--;
-                 updatePlayerLocation();
-            }
-            else{
-            erasepastL();
-            playerX=19;
-            updatePlayerLocation();
-            }
-         }
-         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-               if(playerX!=19){
-                lastColor();
-                 playerX++;
-                 updatePlayerLocation();
-               }    
-               else{
-               erasepastR();
-               playerX=0;
-               updatePlayerLocation();
-               }
-         }
-    
-           if(e.getKeyCode() == KeyEvent.VK_UP){
-             if(playerY!=0){
-                lastColor();
-                 playerY--;
-                 updatePlayerLocation();
-             }  
-             else{
-             erasepastU();
-             playerY=19;
-             updatePlayerLocation();
-             }
-         }
-           
-            if(e.getKeyCode() == KeyEvent.VK_DOWN){
-                if(playerY!=19){
-                lastColor();
-                 playerY++;
-                 updatePlayerLocation() ;
-                }   
-                else{
-                    playerY=0;
-                    erasepastD();
-                    updatePlayerLocation() ;
-
-                }
-         }
-        repaint();
-            
-        
-   }
+    public void keyPressed(KeyEvent e) {
+//    
+//            
+//         if(e.getKeyCode() == KeyEvent.VK_LEFT){
+//         
+//            if(playerX!=0){
+//                 lastColor();
+//                    playerX--;
+//                 updatePlayerLocation();
+//            }
+//            else{
+//            erasepastL();
+//            playerX=19;
+//            updatePlayerLocation();
+//            }
+//         }
+//         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+//               if(playerX!=19){
+//                lastColor();
+//                 playerX++;
+//                 updatePlayerLocation();
+//               }    
+//               else{
+//               erasepastR();
+//               playerX=0;
+//               updatePlayerLocation();
+//               }
+//         }
+//    
+//           if(e.getKeyCode() == KeyEvent.VK_UP){
+//             if(playerY!=0){
+//                lastColor();
+//                 playerY--;
+//                 updatePlayerLocation();
+//             }  
+//             else{
+//             erasepastU();
+//             playerY=19;
+//             updatePlayerLocation();
+//             }
+//         }
+//           
+//            if(e.getKeyCode() == KeyEvent.VK_DOWN){
+//                if(playerY!=19){
+//                lastColor();
+//                 playerY++;
+//                 updatePlayerLocation() ;
+//                }   
+//                else{
+//                    playerY=0;
+//                    erasepastD();
+//                    updatePlayerLocation() ;
+//
+//                }
+//         }
+//        repaint();
+//            
+//        
+    }
     @Override
     public void keyTyped(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
    
@@ -449,8 +322,8 @@ public class GameView extends JFrame implements KeyListener {
          
          
        // theNumberPanelArray[1][1].setBackground(Color.yellow);
-       /*  this.gridPanel.validate();
-         this.gridPanel.repaint();
+       /*  this.gamePanel.validate();
+         this.gamePanel.repaint();
          this.validate();
          this.repaint();*/
     
