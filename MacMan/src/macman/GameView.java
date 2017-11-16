@@ -43,7 +43,7 @@ public class GameView extends JFrame implements KeyListener {
         private ArrayList<KeyEvent> keysDown;  
         private boolean isWall = false;
         private Enemy[] enemies;
-        
+        int level =1; 
     public GameView(GameController theParentGameController){
         
         theGameController = theParentGameController;
@@ -140,10 +140,13 @@ public class GameView extends JFrame implements KeyListener {
                this.gridPanel.add(theNumberPanelArray[i][j]);
           }
     }
+        
+        
+        
     }
     
     public void points(){
-    int numberOfPoints = 25;
+    int numberOfPoints = 2;
     
     for(int d=0; d<numberOfPoints; d++){
          JPanel point =new JPanel();
@@ -220,7 +223,8 @@ public class GameView extends JFrame implements KeyListener {
               enemies[i].moveRight();
               theNumberPanelArray[enemies[i].xPos][enemies[i].yPos].setBackground(Color.RED);
               if(playerX == enemies[i].xPos && playerY == enemies[i].yPos) {
-                collision();     
+              
+                  collision();     
             }
               break;
             
@@ -260,13 +264,12 @@ public class GameView extends JFrame implements KeyListener {
                 touch +=1;
                 }
             }
-            
-        
-            
+                    
         }
         
          if(touch == 400){
                 JOptionPane.showMessageDialog(null, "win");
+                theGameController.levelCompleted();
          }
         
     }
@@ -274,12 +277,18 @@ public class GameView extends JFrame implements KeyListener {
     
     
     
-    
+     public void nextLevel(int level){
+        this.FillGrid(level);
+        this.points();
+        this.revalidate();
+        this.repaint();
+  
+  }
     
     
     public void collision() {
         JOptionPane.showMessageDialog(null, "game over");
-        theGameController.backmenu();
+        theGameController.gameOver();
         this.setVisible(false);
     }
       
