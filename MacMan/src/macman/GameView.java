@@ -84,9 +84,9 @@ public class GameView extends JFrame implements KeyListener {
        this.add(thePlayerUI.getPanel(),BorderLayout.EAST);
         gridPanel.addKeyListener(this);
         FillGrid(); 
-        updatePlayerLocation();
+        
         points();
-       
+        updatePlayerLocation();
             
     }
    
@@ -219,6 +219,7 @@ public class GameView extends JFrame implements KeyListener {
        player = theNumberPanelArray[playerX][playerY];
        player.setBackground(Color.yellow);
        checkCollision();
+       chechVicotry();
     }
     
     public void checkCollision() {
@@ -228,6 +229,34 @@ public class GameView extends JFrame implements KeyListener {
             }
         }
     }
+    
+    public void chechVicotry(){
+        
+        int touch =0;
+        for(int i=0; i<20; i++){
+            for(int j=0; j<20; j++){
+                if(theNumberPanelArray[i][j].getBackground() != Color.GREEN){
+                    
+                
+                touch +=1;
+                }
+            }
+            
+        
+            
+        }
+        
+         if(touch == 400){
+                JOptionPane.showMessageDialog(null, "win");
+         }
+        
+    }
+    
+    
+    
+    
+    
+    
     
     public void collision() {
         JOptionPane.showMessageDialog(null, "game over");
