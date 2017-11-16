@@ -13,6 +13,7 @@ import javax.swing.JFrame;
  * @author N9864
  */
 public class GameController {
+    private int level;
     private GameView theGameView = null;
     private GameThread theGameThread;
     MenuController theMenuCntl;
@@ -24,8 +25,7 @@ public class GameController {
         theGameView.setVisible(true);
         theGameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         theGameView.setLocationRelativeTo(null);
-        theGameThread = new GameThread(this);
-        theGameThread.start();
+        theGameThread = new GameThread(this, 1);
 //        theGameThread.run();
        
       
@@ -34,9 +34,25 @@ public class GameController {
   public void update() {
       theGameView.updateEnemies();
   }
-  public void backmenu(){
+  public void backMenu(){
       theGameView.setVisible(false);
     theMenuCntl = new MenuController();
   
+  }
+ 
+  
+  
+  public void levelCompleted() {
+      level++;
+      theGameThread.setDifficulty(level);
+      theGameView.nextLevel(level);
+  }
+  
+ 
+  
+  public void gameOver() {
+      theGameView.dispose();
+      theGameThread = null;
+      backMenu();
   }
 }
