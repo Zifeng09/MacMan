@@ -96,23 +96,63 @@ public class GameView extends JFrame implements KeyListener {
     
    
     public void buildWall(){
-       int i = 2;
+       int i = 1;
         Border whiteline;
         whiteline = BorderFactory.createLineBorder(Color.white);
-        while(i == 2){
-            for(int j = 0; j<= 13; j++){
+        while(i == 1){
+            for(int j = 0; j<= 14; j++){
                 theNumberPanelArray[i][j].setBorder(whiteline);
                 theNumberPanelArray[i][j].setBackground(Color.BLACK);
             }
-            i = 15;
+            i = 9;
         }
-        while(i == 15){
-            for(int j = 6; j<= 12; j++){
+        while(i == 9){
+            for(int j = 2; j<= 12; j++){
                 theNumberPanelArray[j][i].setBorder(whiteline);
                 theNumberPanelArray[j][i].setBackground(Color.BLACK);
         }
-            i = 10;
+            i = 14;
+        }
+        
+        while(i == 14){
+            for(int j = 4; j<= 10; j++){
+                theNumberPanelArray[j][i].setBorder(whiteline);
+                theNumberPanelArray[j][i].setBackground(Color.BLACK);
+        }
+            for(int j = 11; j < 18; j++){
+                theNumberPanelArray[i][j].setBorder(whiteline);
+                theNumberPanelArray[i][j].setBackground(Color.BLACK);
+            }
+            i = 11;
     }
+        while(i == 11){
+              for(int j = 12; j < 20; j++){
+                theNumberPanelArray[i][j].setBorder(whiteline);
+                theNumberPanelArray[i][j].setBackground(Color.BLACK);
+            }
+              i = 5;
+        }
+        while(i == 5){
+              for(int j = 0; j <= 6; j++){
+                theNumberPanelArray[i][j].setBorder(whiteline);
+                theNumberPanelArray[i][j].setBackground(Color.BLACK);
+            }
+              i = 3;
+        }
+        while(i == 3){
+            for(int j = 6; j <= 15; j++){
+                theNumberPanelArray[j][i].setBorder(whiteline);
+                theNumberPanelArray[j][i].setBackground(Color.BLACK);
+            }
+            i = 6;
+        }
+        while(i == 6){
+            for(int j = 10; j < 20; j++){
+                theNumberPanelArray[j][i].setBorder(whiteline);
+                theNumberPanelArray[j][i].setBackground(Color.BLACK);
+            }
+            i = 0;
+        }    
     }
     
     public void FillGrid(){
