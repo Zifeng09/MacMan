@@ -30,11 +30,21 @@ public class MenuView extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        StartButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         StartButton = new javax.swing.JButton();
+        highScoreButton = new javax.swing.JButton();
+        instructionButton = new javax.swing.JButton();
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/macman/mm.png"))); // NOI18N
+
+        StartButton1.setText("Start");
+        StartButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StartButton1ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 153, 255));
@@ -51,6 +61,20 @@ public class MenuView extends javax.swing.JFrame {
             }
         });
 
+        highScoreButton.setText("High Scores");
+        highScoreButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                highScoreButtonActionPerformed(evt);
+            }
+        });
+
+        instructionButton.setText("Instructions");
+        instructionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                instructionButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -60,8 +84,11 @@ public class MenuView extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(30, 30, 30))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(111, 111, 111)
-                .addComponent(StartButton)
+                .addGap(101, 101, 101)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(instructionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(highScoreButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(StartButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -69,9 +96,13 @@ public class MenuView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(99, 99, 99)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
                 .addComponent(StartButton)
-                .addGap(63, 63, 63))
+                .addGap(18, 18, 18)
+                .addComponent(highScoreButton)
+                .addGap(18, 18, 18)
+                .addComponent(instructionButton)
+                .addGap(44, 44, 44))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -93,10 +124,27 @@ public class MenuView extends javax.swing.JFrame {
        this.setVisible(false);
     }//GEN-LAST:event_StartButtonActionPerformed
 
+    private void StartButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StartButton1ActionPerformed
+
+    private void highScoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_highScoreButtonActionPerformed
+       theMenuCntl.viewHighscores();
+       this.setVisible(false);
+    }//GEN-LAST:event_highScoreButtonActionPerformed
+
+    private void instructionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instructionButtonActionPerformed
+        theMenuCntl.viewInstructions();
+        this.setVisible(false);
+    }//GEN-LAST:event_instructionButtonActionPerformed
+
         
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton StartButton;
+    private javax.swing.JButton StartButton1;
+    private javax.swing.JButton highScoreButton;
+    private javax.swing.JButton instructionButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
