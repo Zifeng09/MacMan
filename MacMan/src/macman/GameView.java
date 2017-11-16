@@ -26,7 +26,7 @@ import java.util.Random;
 public class GameView extends JFrame implements KeyListener {
     public static final int boardWidth = 20;
     public static final int boardHeight = 20;
-    playerUI thePlayerUI;
+    playerUI thePlayerUI = new playerUI();
     
         int playerX = 0;
         int playerY = 0;
@@ -71,7 +71,7 @@ public class GameView extends JFrame implements KeyListener {
     }
      
     private void paint() {
-       thePlayerUI = new playerUI(theGameController);
+      
        gridPanel = new JPanel();
        gridPanel.setLayout(null);
        gridPanel.setSize(new Dimension(315,340));

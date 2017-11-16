@@ -35,7 +35,6 @@ public class GameController {
       theGameView.updateEnemies();
   }
   public void backmenu(){
-      theGameView.setVisible(false);
     theMenuCntl = new MenuController();
   
   }

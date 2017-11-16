@@ -16,13 +16,7 @@ public class playerUI extends javax.swing.JFrame {
     /**
      * Creates new form playerU
      */
-    
-    private GameController theGameCntl;
-    private GameView theGameView;
-    
-    
-    public playerUI(GameController parentGameCntl) {
-        theGameCntl = parentGameCntl;
+    public playerUI() {
         initComponents();
         levelButton.setVisible(false);
     }
@@ -45,7 +39,7 @@ public class playerUI extends javax.swing.JFrame {
     private void initComponents() {
 
         playerPanel = new javax.swing.JPanel();
-        returnButton = new javax.swing.JButton();
+        exitButton = new javax.swing.JButton();
         levelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -54,13 +48,13 @@ public class playerUI extends javax.swing.JFrame {
         playerPanel.setBackground(new java.awt.Color(102, 102, 102));
         playerPanel.setPreferredSize(new java.awt.Dimension(185, 340));
 
-        returnButton.setBackground(new java.awt.Color(204, 204, 255));
-        returnButton.setText("Return");
-        returnButton.setMaximumSize(new java.awt.Dimension(100, 23));
-        returnButton.setMinimumSize(new java.awt.Dimension(100, 23));
-        returnButton.addActionListener(new java.awt.event.ActionListener() {
+        exitButton.setBackground(new java.awt.Color(204, 204, 255));
+        exitButton.setText("Return");
+        exitButton.setMaximumSize(new java.awt.Dimension(100, 23));
+        exitButton.setMinimumSize(new java.awt.Dimension(100, 23));
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                returnButtonActionPerformed(evt);
+                exitButtonActionPerformed(evt);
             }
         });
 
@@ -79,7 +73,7 @@ public class playerUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, playerPanelLayout.createSequentialGroup()
                 .addContainerGap(48, Short.MAX_VALUE)
                 .addGroup(playerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(returnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(levelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37))
         );
@@ -89,7 +83,7 @@ public class playerUI extends javax.swing.JFrame {
                 .addContainerGap(190, Short.MAX_VALUE)
                 .addComponent(levelButton)
                 .addGap(18, 18, 18)
-                .addComponent(returnButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(86, 86, 86))
         );
 
@@ -121,10 +115,9 @@ public class playerUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_levelButtonActionPerformed
 
-    private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         // TODO add your handling code here:
-        theGameCntl.backmenu();
-    }//GEN-LAST:event_returnButtonActionPerformed
+    }//GEN-LAST:event_exitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,12 +148,16 @@ public class playerUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new playerUI().setVisible(true);
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton exitButton;
     private javax.swing.JButton levelButton;
     private javax.swing.JPanel playerPanel;
-    private javax.swing.JButton returnButton;
     // End of variables declaration//GEN-END:variables
 }
