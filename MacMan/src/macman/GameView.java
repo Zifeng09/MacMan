@@ -84,23 +84,12 @@ public class GameView extends JFrame implements KeyListener {
        this.add(thePlayerUI.getPanel(),BorderLayout.EAST);
         gridPanel.addKeyListener(this);
         FillGrid(); 
-        buildWall();
         updatePlayerLocation();
         points();
        
             
     }
    
-    public void buildWall(){
-        int i = 2;
-
-        while(i == 2){
-            for(int j = 0; j <= 8; j++){
-                theNumberPanelArray[i][j].setBackground(Color.BLACK);
-            }
-            i = 3;
-        }
-    }
   
     public void FillGrid(){
       
