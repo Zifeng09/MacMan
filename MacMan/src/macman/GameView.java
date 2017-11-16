@@ -318,7 +318,7 @@ public class GameView extends JFrame implements KeyListener {
     
     
      public void nextLevel(int level){
-        this.FillGrid(level);
+        //this.FillGrid(level);
         this.points();
         this.revalidate();
         this.repaint();
