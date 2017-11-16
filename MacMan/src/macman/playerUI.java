@@ -123,7 +123,7 @@ public class playerUI extends javax.swing.JFrame {
 
     private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
         // TODO add your handling code here:
-        theGameCntl.backmenu();
+        theGameCntl.backMenu();
     }//GEN-LAST:event_returnButtonActionPerformed
 
     /**
