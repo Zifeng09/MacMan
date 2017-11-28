@@ -62,5 +62,6 @@ public class PlayerPanel extends JPanel {
 		System.err.println("Updateing Level");
 		levelLbl.setText("Level " + String.valueOf(level));
 	}
+        
 	
 }

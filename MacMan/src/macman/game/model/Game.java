@@ -71,5 +71,9 @@ public class Game {
 		map = new Map(level, this);
 		this.parentController.nextLevel(map);
 	}
+        public int returnScore(){
+        return score;
+        
+        }
 	
 }

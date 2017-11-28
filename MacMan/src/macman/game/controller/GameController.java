@@ -50,6 +50,7 @@ public class GameController {
   public void gameOver() {
 		theGameThread.dispose();
 		theGameView.dispose();
+                checkHighScore(game.returnScore());
 		backMenu();
   }
   
@@ -70,4 +71,9 @@ public class GameController {
 	public void updatePlayerHealth(int health) {
 		this.theGameView.updatePlayerHealth(health);
 	}
+        public void checkHighScore(int Score){
+                
+        
+        }
+        
 }
