@@ -20,7 +20,6 @@ import javax.swing.JOptionPane;
 import macman.game.controller.GameController;
 import macman.game.map.Map;
 import macman.game.view.GamePanel;
-import macman.playerUI;
 
 /**
  *
@@ -72,6 +71,7 @@ public class GameView extends JFrame implements KeyListener {
 		c.weighty = 1;
 		c.fill= GridBagConstraints.BOTH;
 		this.add(playerPanel, c);
+		
 		this.setSize(700, 500);
     }
     
