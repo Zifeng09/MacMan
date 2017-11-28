@@ -32,10 +32,6 @@ public class Game {
 		this.map = new Map(level, this);
 	}
 	
-	public void moveEnemies() {
-        map.updateEnemies();
-    }
-	
 	
 	
 	public void collision() {

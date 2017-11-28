@@ -38,10 +38,10 @@ public class PlayerPanel extends JPanel {
 		scoreLbl = new JLabel("Score: 0");
 		c.gridy = 1;
 		add(scoreLbl, c);
-		healthBar = new JProgressBar(0, 3, 3);
+		healthBar = new JProgressBar(00, 3);
 		healthBar.setValue(3);
 		healthBar.setForeground(Color.GREEN);
-		healthBar.setBackground(Color.GREEN);
+		healthBar.setBackground(Color.RED);
 		c.gridy =2;
 		add(healthBar, c);
 		

@@ -13,21 +13,27 @@ import javax.swing.Timer;
  * @author mpk5206
  */
 public class GameThread{
-    private static final int timerThing = 50;
-    private Timer timer;
+    private static final int timerThing = 25;
+    private Timer graphicsTimer;
     private GameController parentController;
     
     public GameThread(GameController gameController, int difficulty) {
         this.parentController = gameController;
-        timer = new Timer(timerThing, (ActionEvent ae) -> { 
+        graphicsTimer = new Timer(timerThing, (ActionEvent ae) -> { 
             parentController.updateGame();
         });
-        timer.start();
+        graphicsTimer.start();
     }
     
     public void setDifficulty(int difficulty) {
-        timer.setDelay(timerThing / difficulty);
+        graphicsTimer.setDelay(timerThing / difficulty);
     }
+	
+	public void dispose() {
+		graphicsTimer.stop();
+		graphicsTimer = null;
+		parentController = null;
+	}
     
 //    @Override
 //    public void run() {

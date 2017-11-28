@@ -27,6 +27,13 @@ public class MenuController {
         theMenuView.setLocationRelativeTo(null);
         
     }
+	
+	public MenuController(GameController oldController){
+        theMenuView = new MenuView(this);
+        theMenuView.setVisible(true);
+        theMenuView.setLocationRelativeTo(null);
+        oldController = null;
+    }
     
     
     public void startGame(){

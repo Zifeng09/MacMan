@@ -38,7 +38,7 @@ public class GameController {
   
   public void backMenu(){
 		theGameView.setVisible(false);
-		new MenuController();
+		new MenuController(this);
   }
  
   public void levelCompleted() {
@@ -48,8 +48,8 @@ public class GameController {
   }
   
   public void gameOver() {
+		theGameThread.dispose();
 		theGameView.dispose();
-		theGameThread = null;
 		backMenu();
   }
   

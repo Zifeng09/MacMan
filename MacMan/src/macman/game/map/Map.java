@@ -6,10 +6,12 @@
 package macman.game.map;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import macman.game.enemy.model.Enemy;
 import macman.Direction;
 import macman.game.macman.model.MacManEntity;
@@ -24,8 +26,8 @@ import macman.game.model.Game;
  */
 public class Map {
 	private Random rng = new Random();
-	private static final int ENEMY_COUNT = 0;
-	private int numberOfPoints = 1;
+	private static final int ENEMY_COUNT = 4;
+	private int numberOfPoints = 5;
 	private int numberOfPointsCollected = 0;
 	private SpacePanel[][] spaceArray;
 	private Enemy[] enemies = new Enemy[ENEMY_COUNT];
@@ -34,6 +36,10 @@ public class Map {
 	private int level = 1;
 	private Game parentGame;
 	private MacManEntity player;
+	private int baseTimer = 500;
+	private Timer enemyMovementTimer = new Timer (baseTimer / level, (ActionEvent ae) -> { 
+		moveEnemies();
+	});
 	
 	public Map(int level, Game parentGame) {
 		this.parentGame =  parentGame;
@@ -45,14 +51,16 @@ public class Map {
 		
 		this.generateEnemies();
 		this.spawnPoints();
+		enemyMovementTimer.setDelay(baseTimer/this.level);
+		enemyMovementTimer.start();
 	}
 	
 	private void generateSpaces() {
 		spaceArray = new SpacePanel[mapHeight][mapWidth];
 		for (int i = 0; i < mapHeight; i++) {
 			for(int j = 0; j < mapWidth; j++) {
-				//spaceArray[i][j] = new SpacePanel(this, rng.nextBoolean());
-				spaceArray[i][j] = new SpacePanel(this, false);
+				spaceArray[i][j] = new SpacePanel(this, rng.nextInt(11) > 8);
+				//spaceArray[i][j] = new SpacePanel(this, false);
 			}
 		}
 	}
@@ -66,7 +74,7 @@ public class Map {
 			randomY = rng.nextInt(mapWidth);
 			randomSpace = spaceArray[randomX][randomY];
 		} while (randomSpace.isWallSpace());
-		SpacePanel playerSpawnPanel = this.getRandomSpace(false);
+		SpacePanel playerSpawnPanel = spaceArray[randomX][randomY];
 		this.player = new MacManEntity(this, playerSpawnPanel, randomX, randomY);
 		
 		playerSpawnPanel.setPlayerState(true);
@@ -106,7 +114,7 @@ public class Map {
 		return this.mapHeight;
 	}
 	
-	public void updateEnemies() {
+	public void moveEnemies() {
 		for(int i = 0; i < enemies.length; i++) {
             Random rand = new Random();
             int n = rand.nextInt(4)+1;
@@ -114,7 +122,7 @@ public class Map {
             SpacePanel desiredSpace;
             switch(n) {
                 case 1: // Moving Up
-                    spaceArray[enemies[i].getXPos()][enemies[i].getYPos()].setBackground(Color.BLUE);
+                    //spaceArray[enemies[i].getXPos()][enemies[i].getYPos()].setBackground(Color.BLUE);
                     if (enemies[i].getYPos() == 0) {
                         desiredSpace = spaceArray[enemies[i].getXPos()][mapHeight - 1];
                     } else {
@@ -124,13 +132,13 @@ public class Map {
                         enemies[i].move(Direction.UP);
 						enemies[i].changeCurrentSpace(desiredSpace);
                     }
-                    spaceArray[enemies[i].getXPos()][enemies[i].getYPos()].setBackground(Color.RED);
+                    //spaceArray[enemies[i].getXPos()][enemies[i].getYPos()].setBackground(Color.RED);
                     if(player.getXPos() == enemies[i].getXPos() && player.getYPos() == enemies[i].getYPos()) {
 						collisionDetected();
                     }
                     break;
                 case 2: // Moing Down
-                    spaceArray[enemies[i].getXPos()][enemies[i].getYPos()].setBackground(Color.BLUE);
+                    //spaceArray[enemies[i].getXPos()][enemies[i].getYPos()].setBackground(Color.BLUE);
                     if(enemies[i].getYPos() == mapHeight - 1) {
                         desiredSpace = spaceArray[enemies[i].getXPos()][0];
                     } else {
@@ -140,13 +148,13 @@ public class Map {
                         enemies[i].move(Direction.DOWN);
 						enemies[i].changeCurrentSpace(desiredSpace);
                     }
-                    spaceArray[enemies[i].getXPos()][enemies[i].getYPos()].setBackground(Color.RED);
+                    //spaceArray[enemies[i].getXPos()][enemies[i].getYPos()].setBackground(Color.RED);
                     if(player.getXPos() == enemies[i].getXPos() && player.getYPos() == enemies[i].getYPos()) {
                       collisionDetected();     
                     }
                     break;    
                 case 3: //Left
-                    spaceArray[enemies[i].getXPos()][enemies[i].getYPos()].setBackground(Color.BLUE);
+                    //spaceArray[enemies[i].getXPos()][enemies[i].getYPos()].setBackground(Color.BLUE);
                     if(enemies[i].getXPos() == 0) {
                         desiredSpace = spaceArray[mapWidth - 1][enemies[i].getYPos()];
                     } else { 
@@ -156,13 +164,13 @@ public class Map {
                         enemies[i].move(Direction.LEFT);
 						enemies[i].changeCurrentSpace(desiredSpace);
                     }
-                    spaceArray[enemies[i].getXPos()][enemies[i].getYPos()].setBackground(Color.RED);
+                    //spaceArray[enemies[i].getXPos()][enemies[i].getYPos()].setBackground(Color.RED);
                     if(player.getXPos() == enemies[i].getXPos() && player.getYPos() == enemies[i].getYPos()) {
                       collisionDetected();     
                     }
                     break;
                 case 4:   
-                    spaceArray[enemies[i].getXPos()][enemies[i].getYPos()].setBackground(Color.BLUE);
+                    //spaceArray[enemies[i].getXPos()][enemies[i].getYPos()].setBackground(Color.BLUE);
                     if(enemies[i].getXPos() == mapWidth - 1) {
                         desiredSpace = spaceArray[0][enemies[i].getYPos()];
                     } else {
@@ -172,7 +180,7 @@ public class Map {
                       enemies[i].move(Direction.RIGHT);
 					  enemies[i].changeCurrentSpace(desiredSpace);
                     }
-                    spaceArray[enemies[i].getXPos()][enemies[i].getYPos()].setBackground(Color.RED);
+                    //spaceArray[enemies[i].getXPos()][enemies[i].getYPos()].setBackground(Color.RED);
                     if(player.getXPos() == enemies[i].getXPos() && player.getYPos() == enemies[i].getYPos()) {
                         collisionDetected();     
                     }
@@ -267,6 +275,7 @@ public class Map {
 		this.parentGame.pointCollected();
 		numberOfPointsCollected++;
 		if(numberOfPointsCollected == numberOfPoints) {
+			enemyMovementTimer.stop();
 			parentGame.mapCleared();
 		}
 	}
@@ -336,11 +345,13 @@ public class Map {
 	}
 	
 	public void update() {
-		System.out.println("Here");
-		updateEnemies();
 		for(int i = 0; i < mapHeight; i++) {
 			for(int j = 0; j < mapWidth; j++) {
-				spaceArray[i][j].paintComponents(spaceArray[i][j].getGraphics());
+				SpacePanel selectedSpace = spaceArray[i][j];
+				if(selectedSpace.stateChanged == true) {
+					selectedSpace.paintComponent(spaceArray[i][j].getGraphics());
+					selectedSpace.stateChanged = false;
+				}
 			}
 		}
 	}
