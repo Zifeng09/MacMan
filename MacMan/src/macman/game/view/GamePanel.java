@@ -43,16 +43,14 @@ public class GamePanel extends JPanel {
     public GamePanel(Map theMap) {
 		this.map = theMap;
         placeSpacePanels();
-        this.setBackground(Color.BLACK);
-        this.repaint();
-        this.revalidate();
     }
     
     private void placeSpacePanels() {
         this.setLayout(new GridBagLayout());
+		this.removeAll();
         GridBagConstraints c = new GridBagConstraints();
         for(int i = 0; i < map.getHeight(); i++) {
-            for(int j=0; j < map.getWidth(); j++) {
+            for(int j = 0; j < map.getWidth(); j++) {
                 c.gridx = i;
                 c.gridy = j;
                 c.weightx = 1;
@@ -61,6 +59,14 @@ public class GamePanel extends JPanel {
                 add(map.getSpacePanel(i ,j), c);
             }
         }
+		this.setBackground(Color.BLACK);
+        this.repaint();
+        this.revalidate();
     }
+	
+	public void setMap(Map nextMap) {
+		this.map = nextMap;
+		this.placeSpacePanels();
+	}
 
 }

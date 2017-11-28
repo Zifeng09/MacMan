@@ -30,9 +30,6 @@ public class MacManEntity {
 	}
 
 	public void move(Direction direction) {
-		System.out.println("Moving " + direction);
-		System.out.println("PlayerX: " + xPos);
-		System.out.println("PlayerY: " + yPos);
 		switch(direction) {
 			case NONE:
 				//Do Nothing

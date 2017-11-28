@@ -22,8 +22,11 @@ public class SpacePanel extends JPanel {
 	
 	private boolean hasPlayer = false;
 	private boolean hasEnemy = false;
+	private boolean hasPoint = false;
+	private Map parentMap;
     
-    public SpacePanel(boolean isAWallSpace) {
+    public SpacePanel(Map parentMap, boolean isAWallSpace) {
+		this.parentMap = parentMap;
         this.isAWallSpace = isAWallSpace;
         if(isAWallSpace) {
             background = Color.BLACK;
@@ -46,6 +49,9 @@ public class SpacePanel extends JPanel {
 			this.background = Color.BLUE;
 			this.setBackground(background);
 		}
+		if (this.hasPlayer && this.hasPoint) {
+			this.parentMap.pointCollected();
+		}
 		this.paintComponents(this.getGraphics());
 	}
 	
@@ -60,6 +66,8 @@ public class SpacePanel extends JPanel {
 			paintPlayerImage();
 		} else if (hasEnemy) {
 			paintEnemyImage();
+		} else if (hasPoint) {
+			paintPointImage();
 		} else {
 			this.setBackground(background);
 		}
@@ -74,7 +82,15 @@ public class SpacePanel extends JPanel {
 		this.setBackground(Color.RED);
 	}
 	
+	private void paintPointImage() {
+		this.setBackground(Color.GREEN);
+	}
+	
 	private void paintWall() {
 		this.setBackground(Color.BLACK);
+	}
+	
+	void setPointState(boolean pointState) {
+		this.hasPoint = pointState;
 	}
 }

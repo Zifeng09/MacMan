@@ -18,6 +18,7 @@ import java.awt.event.KeyListener;
 import javax.swing.border.Border;
 import javax.swing.JOptionPane;
 import macman.game.controller.GameController;
+import macman.game.map.Map;
 import macman.game.view.GamePanel;
 import macman.playerUI;
 
@@ -175,6 +176,14 @@ public class GameView extends JFrame implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent ke) {
 
+	}
+
+	public void setMap(Map nextMap) {
+		this.gamePanel.setMap(nextMap);
+	}
+	
+	public void updateScore(int score) {
+		this.playerPanel.updateScore(score);
 	}
 }
     

@@ -159,6 +159,14 @@ public class playerUI extends javax.swing.JFrame {
         /* Create and display the form */
 
     }
+	
+	public void updateScore(int score) {
+		// TODO: This needs to update the score Label;
+	}
+	
+	public void updatePlayerHealth(int health) {
+		//TODO: This needs to update the health bar or whatever
+	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton levelButton;

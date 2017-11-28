@@ -56,4 +56,12 @@ public class GameController {
 	public Map getGameMap() {
 		return this.game.getMap();
 	}
+	
+	public void nextLevel(Map nextMap) {
+		theGameView.setMap(nextMap);
+	}
+	
+	public void updateScore(int score) {
+		this.theGameView.updateScore(score);
+	}
 }

@@ -19,12 +19,13 @@ import macman.game.map.SpacePanel;
  * @author Michael Kramer <mpk5206 @ psu.edu>
  */
 public class Game {
-
+	private int score = 0;
+	private int pointValue = 1;
 	private int level = 1;
 	private Map map;
 	private GameController parentController;
 	
-	public Game(int level, GameController parentContoller) {
+	public Game(int level, GameController parentController) {
 		this.parentController = parentController;
 		this.level = level;
 		this.map = new Map(level, this);
@@ -41,10 +42,6 @@ public class Game {
         parentController.gameOver();
     }
 	
-	public void victory() {
-		//Should do stuff
-	}
-	
 	public int getBoardWidth() {
 		return this.map.getWidth();
 	}
@@ -59,6 +56,19 @@ public class Game {
 	
 	public void updateMap() {
 		map.update();
+	}
+
+	public void pointCollected() {
+		System.out.println("Point Collected");
+		this.score += pointValue;
+		this.parentController.updateScore(score);
+	}
+
+	public void mapCleared() {
+		System.out.println("This map was cleared");
+		level++;
+		map = new Map(level, this);
+		this.parentController.nextLevel(map);
 	}
 	
 }

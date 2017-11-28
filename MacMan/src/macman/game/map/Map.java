@@ -24,7 +24,9 @@ import macman.game.model.Game;
  */
 public class Map {
 	private Random rng = new Random();
-	private static final int ENEMY_COUNT = 4;
+	private static final int ENEMY_COUNT = 0;
+	private int numberOfPoints = 1;
+	private int numberOfPointsCollected = 0;
 	private SpacePanel[][] spaceArray;
 	private Enemy[] enemies = new Enemy[ENEMY_COUNT];
 	private int mapWidth = 0;
@@ -42,15 +44,15 @@ public class Map {
 		this.spawnPlayer();
 		
 		this.generateEnemies();
-		this.points();
+		this.spawnPoints();
 	}
 	
 	private void generateSpaces() {
 		spaceArray = new SpacePanel[mapHeight][mapWidth];
 		for (int i = 0; i < mapHeight; i++) {
 			for(int j = 0; j < mapWidth; j++) {
-				spaceArray[i][j] = new SpacePanel(rng.nextBoolean());
-				//spaceArray[i][j] = new SpacePanel(false);
+				//spaceArray[i][j] = new SpacePanel(this, rng.nextBoolean());
+				spaceArray[i][j] = new SpacePanel(this, false);
 			}
 		}
 	}
@@ -79,16 +81,15 @@ public class Map {
 		}
 	}
 	
-	private void points(){
-        int numberOfPoints = 2;
-
-        for(int d=0; d<numberOfPoints; d++){
-            JPanel point =new JPanel();
-            Random rand = new Random();
-            int w = rand.nextInt(spaceArray[0].length);
-            int y = rand.nextInt(spaceArray.length);
-            point.setBackground(Color.green);
-			point = spaceArray[w][y];
+	private void spawnPoints(){
+        for(int i = 0; i < numberOfPoints; i++){
+			SpacePanel randomSpace;
+			do {
+				int randomX = rng.nextInt(spaceArray[0].length);
+				int randomY =rng.nextInt(spaceArray.length);
+				randomSpace = spaceArray[randomX][randomY];
+			} while (randomSpace.isWallSpace());
+			randomSpace.setPointState(true);	
         }
     }  
 	
@@ -208,7 +209,7 @@ public class Map {
     }
 	
 	public void playerEnteredControl(KeyEvent keyEvent) {
-		System.out.println("Here");
+		
 		if(keyEvent == null)
 			return;
         SpacePanel desiredSpace;  
@@ -278,6 +279,14 @@ public class Map {
 				player.setCurrentSpace(desiredSpace);
             }
         }
+	}
+	
+	public void pointCollected() {
+		this.parentGame.pointCollected();
+		numberOfPointsCollected++;
+		if(numberOfPointsCollected == numberOfPoints) {
+			parentGame.mapCleared();
+		}
 	}
 	
 	    public void buildWall(){
