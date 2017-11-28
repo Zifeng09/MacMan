@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package macman;
+package macman.mainmenu;
 
+import macman.MenuView;
+import macman.game.controller.GameController;
 import macman.highscore.ui.HighscoreUI;
 import macman.instruction.ui.InstructionUI;
 

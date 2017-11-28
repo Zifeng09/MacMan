@@ -6,6 +6,8 @@
 package macman;
 
 import javax.swing.JPanel;
+import macman.game.controller.GameController;
+import macman.game.view.GameView;
 
 /**
  *

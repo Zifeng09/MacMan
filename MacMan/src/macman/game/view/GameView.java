@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package macman;
+package macman.game.view;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -17,15 +17,15 @@ import java.awt.GridLayout;
 import java.awt.event.KeyListener;
 import javax.swing.border.Border;
 import javax.swing.JOptionPane;
-import java.util.Random;
+import macman.game.controller.GameController;
+import macman.game.view.GamePanel;
+import macman.playerUI;
 
 /**
  *
  * @author N9864
  */
 public class GameView extends JFrame implements KeyListener {
-    public static final int boardWidth = 20;
-    public static final int boardHeight = 20;
     playerUI thePlayerUI;
     
         int playerX = 0;
@@ -43,55 +43,32 @@ public class GameView extends JFrame implements KeyListener {
         Border blackline;
         private ArrayList<KeyEvent> keysDown;  
         private boolean isWall = false;
-        private Enemy[] enemies;
         int level =1; 
         
     public GameView(GameController theParentGameController){
-        
+		
         theGameController = theParentGameController;
-        
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-	this.setTitle("MACMAN BETA 0.1");
+		this.setTitle("MACMAN BETA 0.1");
         this.setSize(new Dimension(500, 340));
         this.setLayout(new BorderLayout());
         this.addKeyListener(this);
-
-        this.enemies = new Enemy[6];
-        this.enemies[0] = new Enemy();
-        this.enemies[1] = new Enemy();
-        this.enemies[2] = new Enemy();
-        this.enemies[3] = new Enemy();
-        this.enemies[4] = new Enemy();
-        this.enemies[5] = new Enemy();
-        
-        
-        
-       
+		this.gamePanel = new GamePanel(theParentGameController.getGameMap());
+		this.gamePanel.requestFocus();
         this.paint();
         //this.pack();
 
-       
     }
      
     private void paint() {
        thePlayerUI = new playerUI(theGameController);
-       gamePanel = new GamePanel();
-       gamePanel.setSize(new Dimension(315,340));
-       gamePanel.setFocusable(true);
       
        JPanel thePlayerPanel = thePlayerUI.getPanel();
        thePlayerPanel.setSize(185,340);
        
        this.add(gamePanel,BorderLayout.CENTER);
-       this.add(thePlayerUI.getPanel(),BorderLayout.EAST);
-        
-//        FillGrid(1);  
-//        buildWall();
-//        points();
-//        updatePlayerLocation();
-        
-            
+       this.add(thePlayerUI.getPanel(),BorderLayout.EAST);       
     }
     
     
@@ -153,21 +130,7 @@ public class GameView extends JFrame implements KeyListener {
 //    point4.setBackground(Color.green);*/  
 //    
 //    }
-    public void updateEnemies() {
-        gamePanel.updateEnemies();
-    }
-    
-    public void updatePlayerLocation(){
-       gamePanel.updatePlayerLocation();
-    }
-    
-    public void checkCollision() {
-        for(int i = 0; i < enemies.length; i++) {
-            if(playerX == enemies[i].xPos && playerY == enemies[i].yPos) {
-                collision();
-            }
-        }
-    }
+
     
     public void checkVictory(){
 //        
@@ -193,139 +156,27 @@ public class GameView extends JFrame implements KeyListener {
     
     
     
-     public void nextLevel(int level){
-         gamePanel = new GamePanel();
-  
-  }
-    
-    
-    public void collision() {
-        JOptionPane.showMessageDialog(null, "game over");
-        theGameController.gameOver();
-        this.setVisible(false);
-    }
-      
-//    public void erasepastL(){
-//        JPanel past=new JPanel();
-//        past=theNumberPanelArray[0][playerY];
-//        past.setBackground(Color.blue);
-//
-//    }
-//    public void erasepastR(){
-//        JPanel past=new JPanel();
-//        past=theNumberPanelArray[19][playerY];
-//        past.setBackground(Color.blue);
-//
-//    }
-//    public void erasepastU(){
-//        JPanel past=new JPanel();
-//        past=theNumberPanelArray[playerX][0];
-//        past.setBackground(Color.blue);
-//
-//    }
-//    public void erasepastD(){
-//        JPanel past=new JPanel();
-//        past=theNumberPanelArray[playerX][19];
-//        past.setBackground(Color.blue);
-//
-//    }
-//
-//
-//    public void lastColor(){
-//       theNumberPanelArray[playerX][playerY].setBackground(Color.blue);
-//    }
-     
-    
-    
-        @Override
-    public void keyPressed(KeyEvent e) {
-//    
-//            
-//         if(e.getKeyCode() == KeyEvent.VK_LEFT){
-//         
-//            if(playerX!=0){
-//                 lastColor();
-//                    playerX--;
-//                 updatePlayerLocation();
-//            }
-//            else{
-//            erasepastL();
-//            playerX=19;
-//            updatePlayerLocation();
-//            }
-//         }
-//         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-//               if(playerX!=19){
-//                lastColor();
-//                 playerX++;
-//                 updatePlayerLocation();
-//               }    
-//               else{
-//               erasepastR();
-//               playerX=0;
-//               updatePlayerLocation();
-//               }
-//         }
-//    
-//           if(e.getKeyCode() == KeyEvent.VK_UP){
-//             if(playerY!=0){
-//                lastColor();
-//                 playerY--;
-//                 updatePlayerLocation();
-//             }  
-//             else{
-//             erasepastU();
-//             playerY=19;
-//             updatePlayerLocation();
-//             }
-//         }
-//           
-//            if(e.getKeyCode() == KeyEvent.VK_DOWN){
-//                if(playerY!=19){
-//                lastColor();
-//                 playerY++;
-//                 updatePlayerLocation() ;
-//                }   
-//                else{
-//                    playerY=0;
-//                    erasepastD();
-//                    updatePlayerLocation() ;
-//
-//                }
-//         }
-//        repaint();
-//            
-//        
-    }
-    @Override
-    public void keyTyped(KeyEvent e) {
-        
-    }
+    public void nextLevel(int level){
+		 
+	}
 
-   
-    public void keyReleased(KeyEvent e) {
-       
-    }
-    
-    
-    public void keyStopped(KeyEvent e) {
-        
-    }
+	@Override
+	public void keyTyped(KeyEvent ke) {
+		
+	}
 
-    
-    }
+	@Override
+	public void keyPressed(KeyEvent ke) {
+		System.out.println("KeyPressed");
+		this.theGameController.getGameMap().playerEnteredControl(ke);
+        repaint();
+	}
 
-  
+	@Override
+	public void keyReleased(KeyEvent ke) {
 
-         
-         
-         
-         
-       // theNumberPanelArray[1][1].setBackground(Color.yellow);
-       /*  this.gamePanel.validate();
-         this.gamePanel.repaint();
-         this.validate();
-         this.repaint();*/
+	}
+}
     
     
     

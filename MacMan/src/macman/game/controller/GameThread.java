@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package macman;
+package macman.game.controller;
 
 import java.awt.event.ActionEvent;
 import javax.swing.Timer;
@@ -13,14 +13,14 @@ import javax.swing.Timer;
  * @author mpk5206
  */
 public class GameThread{
-    private static final int timerThing = 1000;
+    private static final int timerThing = 50;
     private Timer timer;
     private GameController parentController;
     
     public GameThread(GameController gameController, int difficulty) {
         this.parentController = gameController;
-        timer = new Timer(timerThing / difficulty, (ActionEvent ae) -> { 
-            parentController.update();
+        timer = new Timer(timerThing, (ActionEvent ae) -> { 
+            parentController.updateGame();
         });
         timer.start();
     }

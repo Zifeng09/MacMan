@@ -3,56 +3,57 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package macman;
+package macman.game.controller;
 
 import java.awt.Dimension;
 import javax.swing.JFrame;
+import macman.game.map.Map;
+import macman.game.model.Game;
+import macman.game.view.GameView;
+import macman.mainmenu.MenuController;
 
 /**
  *
  * @author N9864
  */
 public class GameController {
+	private Game game;
     private int level;
     private GameView theGameView = null;
     private GameThread theGameThread;
-    MenuController theMenuCntl;
-    
-    
+   
   public GameController(){
-      
+		this.game = new Game(level, this);
         theGameView = new GameView(this);
         theGameView.setVisible(true);
         theGameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         theGameView.setLocationRelativeTo(null);
+		theGameView.requestFocus();
         theGameThread = new GameThread(this, 1);
-//        theGameThread.run();
-       
-      
   }
   
-  public void update() {
-      theGameView.updateEnemies();
+  public void updateGame() {
+		game.updateMap();
   }
+  
   public void backMenu(){
-      theGameView.setVisible(false);
-    theMenuCntl = new MenuController();
-  
+		theGameView.setVisible(false);
+		new MenuController();
   }
  
-  
-  
   public void levelCompleted() {
-      level++;
-      theGameThread.setDifficulty(level);
-      theGameView.nextLevel(level);
+		level++;
+		theGameThread.setDifficulty(level);
+		theGameView.nextLevel(level);
   }
-  
- 
   
   public void gameOver() {
-      theGameView.dispose();
-      theGameThread = null;
-      backMenu();
+		theGameView.dispose();
+		theGameThread = null;
+		backMenu();
   }
+  
+	public Map getGameMap() {
+		return this.game.getMap();
+	}
 }

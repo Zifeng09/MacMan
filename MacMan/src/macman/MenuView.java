@@ -5,6 +5,8 @@
  */
 package macman;
 
+import macman.mainmenu.MenuController;
+
 /**
  *
  * @author N9864

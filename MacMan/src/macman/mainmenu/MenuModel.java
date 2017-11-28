@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package macman;
+package macman.mainmenu;
 
 /**
  *
  * @author N9864
  */
-public class GameModel {
-
-    
+public class MenuModel {
     
 }
-
-
