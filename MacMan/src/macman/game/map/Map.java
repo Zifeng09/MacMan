@@ -269,6 +269,7 @@ public class Map {
 				player.setCurrentSpace(desiredSpace);
             }
         }
+        checkCollision();
 	}
 	
 	public void pointCollected() {
