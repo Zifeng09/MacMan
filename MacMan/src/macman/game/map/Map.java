@@ -118,7 +118,7 @@ public class Map {
 		for(int i = 0; i < enemies.length; i++) {
             Random rand = new Random();
             int n = rand.nextInt(4)+1;
-            System.out.println(n);
+            //System.out.println(n);
             SpacePanel desiredSpace;
             switch(n) {
                 case 1: // Moving Up
@@ -275,7 +275,7 @@ public class Map {
 		this.parentGame.pointCollected();
 		numberOfPointsCollected++;
 		if(numberOfPointsCollected == numberOfPoints) {
-			enemyMovementTimer.stop();
+			this.levelOver();
 			parentGame.mapCleared();
 		}
 	}
@@ -368,4 +368,8 @@ public class Map {
 		
 		return randomSpace;
 	}
+        
+        public void levelOver() {
+            this.enemyMovementTimer.stop();
+        }
 }

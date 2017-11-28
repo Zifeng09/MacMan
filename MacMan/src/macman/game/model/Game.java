@@ -39,6 +39,7 @@ public class Game {
 		this.parentController.updatePlayerHealth(this.playerHealth);
 		if(playerHealth < 1) {
 			JOptionPane.showMessageDialog(null, "game over");
+                        map.levelOver();
 			parentController.gameOver();
 		}
     }

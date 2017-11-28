@@ -82,7 +82,7 @@ public class SpacePanel extends JPanel {
 	
 	@Override
 	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
+		//super.paintComponent(g);
 		if(isAWallSpace) {
 			paintWallImage(g);
 		} else {
