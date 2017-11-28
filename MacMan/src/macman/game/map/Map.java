@@ -190,24 +190,6 @@ public class Map {
         }
     }
 	
-	public void checkVictory(){
-        
-        int touch =0;
-        for(int i=0; i<20; i++){
-            for(int j=0; j<20; j++){
-                if(spaceArray[i][j].getBackground() != Color.GREEN){
-					touch +=1;
-                }
-            }         
-        }
-        
-        if(touch == 400){
-               JOptionPane.showMessageDialog(null, "win");
-               this.parentGame.victory();
-        }
-        
-    }
-	
 	public void playerEnteredControl(KeyEvent keyEvent) {
 		
 		if(keyEvent == null)

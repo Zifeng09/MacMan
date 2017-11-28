@@ -185,6 +185,10 @@ public class GameView extends JFrame implements KeyListener {
 	public void updateScore(int score) {
 		this.playerPanel.updateScore(score);
 	}
+
+	public void updatePlayerHealth(int health) {
+		this.playerPanel.updateHealth(health);
+	}
 }
     
     

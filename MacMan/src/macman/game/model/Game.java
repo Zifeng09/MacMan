@@ -22,6 +22,7 @@ public class Game {
 	private int score = 0;
 	private int pointValue = 1;
 	private int level = 1;
+	private int playerHealth = 3;
 	private Map map;
 	private GameController parentController;
 	
@@ -38,8 +39,12 @@ public class Game {
 	
 	
 	public void collision() {
-        JOptionPane.showMessageDialog(null, "game over");
-        parentController.gameOver();
+		playerHealth--;
+		this.parentController.updatePlayerHealth(this.playerHealth);
+		if(playerHealth < 1) {
+			JOptionPane.showMessageDialog(null, "game over");
+			parentController.gameOver();
+		}
     }
 	
 	public int getBoardWidth() {

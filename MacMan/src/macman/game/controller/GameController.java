@@ -64,4 +64,8 @@ public class GameController {
 	public void updateScore(int score) {
 		this.theGameView.updateScore(score);
 	}
+
+	public void updatePlayerHealth(int health) {
+		this.theGameView.updatePlayerHealth(health)
+	}
 }
