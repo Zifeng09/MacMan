@@ -27,16 +27,9 @@ import macman.playerUI;
  * @author N9864
  */
 public class GameView extends JFrame implements KeyListener {
-    playerUI thePlayerUI;
-    
-        int playerX = 0;
-        int playerY = 0;
-        int j=9;
-        int k=9;
         JLabel bitcoin;
         JPanel grandPanel = new JPanel();
-        ImageIcon BTC = new ImageIcon("Bitcoin_Logo.png");
-        JPanel playerPanel;
+        PlayerPanel playerPanel;
         JPanel enemyPanel;
         GameController theGameController;
         GamePanel gamePanel;
@@ -52,8 +45,7 @@ public class GameView extends JFrame implements KeyListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 		this.setTitle("MACMAN BETA 0.1");
-        this.setSize(new Dimension(500, 340));
-        this.setLayout(new BorderLayout());
+        
         this.addKeyListener(this);
 		this.gamePanel = new GamePanel(theParentGameController.getGameMap());
 		this.gamePanel.requestFocus();
@@ -63,13 +55,24 @@ public class GameView extends JFrame implements KeyListener {
     }
      
     private void paint() {
-       thePlayerUI = new playerUI(theGameController);
-      
-       JPanel thePlayerPanel = thePlayerUI.getPanel();
-       thePlayerPanel.setSize(185,340);
-       
-       this.add(gamePanel,BorderLayout.CENTER);
-       this.add(thePlayerUI.getPanel(),BorderLayout.EAST);       
+		this.setLayout(new GridBagLayout());
+		playerPanel = new PlayerPanel();
+		GridBagConstraints c = new GridBagConstraints();
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.CENTER;
+		c.weightx = 1;
+		c.weighty = 1;
+		c.fill= GridBagConstraints.BOTH;
+		this.add(gamePanel, c);
+		c.gridx = 1;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.CENTER;
+		c.weightx = .3;
+		c.weighty = 1;
+		c.fill= GridBagConstraints.BOTH;
+		this.add(playerPanel, c);
+		this.setSize(700, 500);
     }
     
     
@@ -187,7 +190,11 @@ public class GameView extends JFrame implements KeyListener {
 	}
 
 	public void updatePlayerHealth(int health) {
-		this.playerPanel.updateHealth(health);
+		this.playerPanel.updatePlayerHealth(health);
+	}
+	
+	public void updateLevel(int level) {
+		this.playerPanel.updateLevel(level);
 	}
 }
     

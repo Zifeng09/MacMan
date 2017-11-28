@@ -18,7 +18,7 @@ import macman.mainmenu.MenuController;
  */
 public class GameController {
 	private Game game;
-    private int level;
+    private int level = 1;
     private GameView theGameView = null;
     private GameThread theGameThread;
    
@@ -58,7 +58,9 @@ public class GameController {
 	}
 	
 	public void nextLevel(Map nextMap) {
+		level++;
 		theGameView.setMap(nextMap);
+		theGameView.updateLevel(level);
 	}
 	
 	public void updateScore(int score) {
@@ -66,6 +68,6 @@ public class GameController {
 	}
 
 	public void updatePlayerHealth(int health) {
-		this.theGameView.updatePlayerHealth(health)
+		this.theGameView.updatePlayerHealth(health);
 	}
 }
