@@ -5,6 +5,7 @@
  */
 package macman;
 
+import macman.highscore.model.Score;
 import javax.swing.ImageIcon;
 
 /**

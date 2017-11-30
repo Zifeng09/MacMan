@@ -5,11 +5,13 @@
  */
 package macman.game.controller;
 
+import externaldata.controller.ExternalDataController;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import macman.game.map.Map;
 import macman.game.model.Game;
 import macman.game.view.GameView;
+import macman.highscore.ui.EnterUsernameUI;
 import macman.mainmenu.MenuController;
 
 /**
@@ -50,7 +52,8 @@ public class GameController {
   public void gameOver() {
 		theGameThread.dispose();
 		theGameView.dispose();
-                checkHighScore(game.returnScore());
+        ExternalDataController dataController = ExternalDataController.getInstance();
+        new EnterUsernameUI(game.getScore()).setVisible(true);
 		backMenu();
   }
   

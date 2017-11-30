@@ -27,10 +27,23 @@ public class ExternalDataController {
     private static final String FILEPATH = "Data.ser";
     private ExternalData externalData;
     
+    public static ExternalDataController getInstance() {
+        return LazyHolder.getInstance();
+    }
+    
+    public ExternalData getExternalData() {
+        return externalData;
+    }
+    
+    public static void save() {
+        LazyHolder.getInstance().writeExternalData();
+    }
+    
     private ExternalDataController() {
         readExternalData();
-        if(externalData == null) {
-            externalData = new ExternalData();
+        if(this.externalData == null) {
+            System.out.println("Creating new ExternalData");
+            this.externalData = new ExternalData();
             writeExternalData();
             readExternalData();
         }
@@ -50,6 +63,9 @@ public class ExternalDataController {
     }
     
     private void writeExternalData() {
+        if(this.externalData == null) {
+            System.err.println("External Data was null for some reason");;
+        }
         ObjectOutputStream out = null;
         try {
             out = new ObjectOutputStream(new FileOutputStream(FILEPATH));
@@ -64,10 +80,10 @@ public class ExternalDataController {
     
     
     private static class LazyHolder {
-        final ExternalDataController INSTANCE = new ExternalDataController();
+        static final ExternalDataController INSTANCE = new ExternalDataController();
          
-        ExternalDataController getInstance() {
-            return this.INSTANCE;
+        static ExternalDataController getInstance() {
+            return INSTANCE;
         }
     }
 }

@@ -5,10 +5,21 @@
  */
 package externaldata.model;
 
+import java.io.Serializable;
+import macman.highscore.model.HighScoreList;
+
 /**
  *
  * @author mpk5206
  */
-public class ExternalData {
+public class ExternalData implements Serializable {
+    private HighScoreList theHighScoreList;
     
+    public ExternalData () {
+        this.theHighScoreList = new HighScoreList();
+    }
+    
+    public HighScoreList getHighScoreList() {
+        return this.theHighScoreList;
+    }
 }

@@ -7,7 +7,7 @@ package macman.game.enemy.model;
 
 import java.util.Random;
 import macman.Direction;
-import macman.Score;
+import macman.highscore.model.Score;
 import macman.game.map.Map;
 import macman.game.map.SpacePanel;
 import macman.game.model.Game;

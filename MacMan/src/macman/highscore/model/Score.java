@@ -3,21 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package macman;
+package macman.highscore.model;
+
+import java.io.Serializable;
 
 /**
  *
  * @author jxw5640
  */
-public class Score {
+public class Score implements Serializable {
     private int score;
     private String username;
-
+    
+    
+    public Score(String username, int score) {
+        this.username = username;
+        this.score = score;
+    }
+    
     /**
      * @return the score
      */
     public int getScore() {
-        return score;
+        return this.score;
     }
 
     /**
@@ -31,7 +39,7 @@ public class Score {
      * @return the username
      */
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     /**
@@ -39,5 +47,10 @@ public class Score {
      */
     public void setUsername(String username) {
         this.username = username;
+    }
+    
+    @Override
+    public String toString() { 
+        return (getUsername() + " " + getScore());
     }
 }
