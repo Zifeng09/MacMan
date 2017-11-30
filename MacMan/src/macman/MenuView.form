@@ -57,26 +57,38 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="66" green="66" red="66" type="rgb"/>
+          <Color blue="33" green="66" red="0" type="rgb"/>
+        </Property>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
+            <MatteColorBorder/>
+          </Border>
         </Property>
       </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="instructionButton" max="32767" attributes="0"/>
-                      <Component id="highScoreButton" max="32767" attributes="0"/>
-                      <Component id="StartButton" alignment="0" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="18" max="32767" attributes="0"/>
                   <Component id="logoIcon" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="instructionButton" min="-2" pref="120" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="StartButton" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                              <Component id="highScoreButton" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -85,13 +97,13 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
                   <Component id="logoIcon" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="168" max="32767" attributes="0"/>
+                  <EmptySpace pref="136" max="32767" attributes="0"/>
                   <Component id="StartButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="highScoreButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="instructionButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -106,6 +118,15 @@
         </Component>
         <Component class="javax.swing.JButton" name="StartButton">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="33" red="66" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Copperplate" size="13" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Start"/>
           </Properties>
           <Events>
@@ -114,6 +135,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="highScoreButton">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Copperplate" size="13" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="High Scores"/>
           </Properties>
           <Events>
@@ -122,7 +146,10 @@
         </Component>
         <Component class="javax.swing.JButton" name="instructionButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Instructions"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Copperplate" size="13" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Instruction"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="instructionButtonActionPerformed"/>
